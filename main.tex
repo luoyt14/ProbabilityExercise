@@ -1,0 +1,72 @@
+\documentclass[11pt]{article}
+\usepackage{xeCJK}
+\usepackage{caption}
+\setCJKmainfont{KaiTi}
+%\setmainfont{Times New Roman}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{enumerate} 
+
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+
+% ========== Edit your name here
+\author{罗雁天}
+\title{习题课1}
+\maketitle
+
+\medskip
+
+% ========== Begin answering questions here
+\begin{enumerate}
+
+\item 在单位圆内随机挑选一条弦，请问弦长大于圆内接等边三角形 边长的概率是多大。
+\begin{proof}[解]
+	本题可以从三个方面考虑：
+	\begin{itemize}
+		\item 如果固定住弦的一个端点A，考察另外一个端点B，那么样本空间就是圆周，等概指的 是B在圆周上均匀分布。那么服从要求的B必然落在以A为端点的圆内接等边三角形中A的对 边所对应的劣弧中。这一段劣弧的长度恰为圆周长度的1/3，因此所求概率为1/3。
+		\item 如果考察弦的中点O，以单位圆盘作为样本空间，等概指的是O在圆盘上均匀分布。那 么服从要求的O必然落在半径为1/2的单位圆的同心圆内。由于两个圆面积比为1/4，因此所 求概率为1/4。
+		\item 同样考察弦的中点O，不过以与该弦垂直的半径作为样本空间，等概指的是O在该半径 上均匀分布。那么服从要求的O 必然落在靠近圆心的一半上。因此所求概率为1/2。
+	\end{itemize}
+	三种角度三个答案，看似矛盾实际却很合理。样本空间不同导致概率模型本身存在差 异，出现不同的结果也就不奇怪了。
+\end{proof}
+
+\item 假定某赌徒携带k元赌资进入赌场，赌博规则很简单，每赢一局则赢1元，否则输1元。假定每局赌博，赌徒赢的概率都是p，且各局间相互独立。试问，赌徒将所带赌资全部输光，被迫离开赌场的概率有多大?
+\begin{proof}[解]
+	设事件$A_k$表示赌徒拥有$k$元初始赌本并最终输光，事件$W$表示赌徒赢得一局。那么有：
+	\begin{equation}
+	P(A_k)=P(A_k|W)P(W)+P(A_k|W^c)P(W^c)
+	\end{equation}
+	注意到$P(A_k|W)=P(A_{k+1}),P(A_k|W^c)=P(A_{k-1})$，我们有：
+	\begin{equation}
+	P(A_k)=pP(A_{k+1})+(1-p)P(A_{k-1})
+	\end{equation}
+	其中$p=P(W)$表示赌徒赢一局的概率。通过此递推式我们可以得到：
+	\begin{equation}
+	P(A_k)=a+b\left(\frac{1-p}{p}\right)^k
+	\end{equation}
+	其中$a,b$为确定性的参数，由初值决定。
+	
+	注意到$P(A_0)=1$，因此我们可以得到$a+b=1$；由于$0\le P(A_k)\le 1$。因此我们有如下结论：
+	\begin{enumerate}[i)]
+		\item 如果$p<0.5$(大多数赌场都满足这一条件)，那么$b=0$，因此$P(A_k)\equiv 1$。这一点不难理解，如 果赌徒赢面小，那么输光应该是肯定的。
+		\item 如果$p>0.5$(这种情况几乎不会出现)，那么
+		\begin{equation}
+		P(A_k)=\left(\frac{1-p}{p}\right)^k+a\left(1-\left(\frac{1-p}{p}\right)^k\right)
+		\end{equation}
+		\item 如果$p=0.5$(赌场绝对公平)，那么$P(A_k)\equiv1$。这一点
+		很让人惊讶。即使在绝对公平的赌场内，赌徒输光也几乎是肯定的。
+	\end{enumerate}
+\end{proof}
+
+\end{enumerate}
+
+\end{document}
