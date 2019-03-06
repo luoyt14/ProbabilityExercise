@@ -102,6 +102,53 @@
 	\end{equation}
 	这说明，尽管误报的概率很高，但是漏报(实际患病，诊断无病)的概率却很低。所以，如果医生真的非常称职且水平很高，那么漏报性质的误诊率是能够充分降低的，即使面对的是十分罕见的疑难杂症。
 \end{proof}
+
+\item {\hei （匹配问题）n个人随机地选取帽子，试问至少有一人戴上了自己帽子的概率是多少。}
+\begin{proof}[解]
+	设$B_k$表示第$k$个人戴对的所有可能结果构成的集合。则至少有一人戴对的所有可能结果可以描述为:
+	\begin{equation}
+	B_1\cup B_2\cup\cdots\cup B_n
+	\end{equation}
+	我们的任务是计算这个集合的概率。由于：
+	\begin{equation}
+	P(B_k)=\frac{(n-1)!}{n!}=\frac{1}{n},P(B_k\cap B_j)=\frac{(n-2)!}{n!}=\frac{1}{n(n-1)},\cdots
+	\end{equation}
+	所以根据容斥原理，我们有：
+	\begin{equation}
+	\begin{aligned}
+	P(B_1\cup B_2\cup\cdots\cup B_n)=&\sum_{k=1}^{n}P(B_k)-\sum_{j<k}P(B_j\cap B_k)+\sum_{i<j<k}P(B_i\cap B_j\cap B_k) \\
+	&-\cdots+(-1)^{n+1}P(B_1\cap B_2\cap \cdots \cap B_n) \\
+	=&n\times\frac{1}{n}-\binom{n}{2}\frac{(n-2)!}{n!}+\binom{n}{3}\frac{(n-3)!}{n!}-\cdots+(-1)^{n+1}\frac{1}{n!} \\
+	=&1-\frac{1}{2!}+\frac{1}{3!}-\cdots+(-1)^{n+1}\frac{1}{n!} \\
+	=&\sum_{k=1}^{n}\frac{(-1)^{k+1}}{k!}
+	\end{aligned}
+	\end{equation}
+	即，至少有一人带上自己帽子的概率为$\sum_{k=1}^{n}\frac{(-1)^{k+1}}{k!}$
+\end{proof}
+
+\item {\hei 重新考虑匹配问题。n个人随机地选取帽子，试问恰好有k人戴上了自己帽子的概率是多少。}
+\begin{proof}[解]
+	考虑戴上了自己帽子的k个人，第一个人戴对的概率是$1/n$;第二个人受到了第一个人戴对的条件限制，戴对的概率是$1/(n−1)$，以此类推，得到
+	\begin{equation}
+	P(A_1)=\frac{1}{n},P(A_2|A_1)=\frac{1}{n-1},P(A_3|A_2A_1)=\frac{1}{n-2},\cdots
+	\end{equation}
+	因此:
+	\begin{equation}
+	P(A_1A_2\cdots A_k)=P(A_1)P(A_2|A_1)P(A_3|A_2A_1)\cdots P(A_k|A_{k-1}\cdots A_1)=\frac{(n-k)!}{n!}
+	\end{equation}
+	另一方面，在$k$个人戴对的情况下，剩下$n-k$个人都没有戴对，根据上一道题的结论，我们有：
+	\begin{equation}
+	P(B_1B_2\cdots B_{n-k}|A_1A_2\cdots A_k)=\sum_{j=2}^{n}\frac{(-1)^{j}}{j!}
+	\end{equation}
+	则有：
+	\begin{equation}
+	P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{(n-k)!}{n!}\sum_{j=2}^{n}\frac{(-1)^{j}}{j!}
+	\end{equation}
+	考虑到戴对帽子的$k$个人的任意性，最终所求概率为：
+	\begin{equation}
+	P=\binom{n}{k}P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{1}{k!}\sum_{j=2}^{n}\frac{(-1)^{j}}{j!}
+	\end{equation}
+\end{proof}
 \end{enumerate}
 
 \end{document}
