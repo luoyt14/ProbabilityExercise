@@ -103,6 +103,7 @@
 	这说明，尽管误报的概率很高，但是漏报(实际患病，诊断无病)的概率却很低。所以，如果医生真的非常称职且水平很高，那么漏报性质的误诊率是能够充分降低的，即使面对的是十分罕见的疑难杂症。
 \end{proof}
 
+
 \item {\hei （匹配问题）n个人随机地选取帽子，试问至少有一人戴上了自己帽子的概率是多少。}
 \begin{proof}[解]
 	设$B_k$表示第$k$个人戴对的所有可能结果构成的集合。则至少有一人戴对的所有可能结果可以描述为:
@@ -126,6 +127,34 @@
 	即，至少有一人带上自己帽子的概率为$\sum_{k=1}^{n}\frac{(-1)^{k+1}}{k!}$
 \end{proof}
 
+\item {\hei （匹配问题2）10对夫妇坐一圈，计算所有的妻子都不坐在她丈夫旁边的概率}
+\begin{proof}[解]
+	令$E_i(i=1,2,...,10)$表示第$i$对夫妇坐在一起，因此，所求概率为：
+	\begin{equation}
+	P=1-P(E_1\cup E_2\cup \cdots \cup E_{10})
+	\end{equation}
+	根据容斥原理：
+	\begin{equation}
+	\label{eq1}
+	P(E_1\cup E_2\cup \cdots \cup E_{10})=\sum_{i=1}^{10}P(E_i)-\sum_{i_1<i_2}P(E_{i_1}E_{i_2})+\cdots-P(E_1E_2\cdots E_{10})
+	\end{equation}
+	为了计算式子中每一项的概率，我们考虑通式$P(E_{i_1}E_{i_2}\cdots E_{i_n})$。先注意到20个人坐一圈一共有$19!$种可能的方式。对于指定的n对夫妇，在排位时使用“捆绑法”，这样在排位时，一共有20-n个对象，在圆桌上一共有$(20-n-1)!=(19-n)!$种排法。当排位确定之后，这$n$对夫妇之间又有排位问题，是男左女右还是男右女左，于是一共有$2^n(19-n)!$种排法。因此我们得到：
+	\begin{equation}
+	P(E_{i_1}E_{i_2}\cdots E_{i_n})=\frac{2^n(19-n)!}{19!}
+	\end{equation}
+	带入式(\ref{eq1})中可以得到：
+	\begin{equation}
+	\begin{aligned}
+	P(E_1\cup E_2\cup \cdots \cup E_{10})&=\binom{10}{1}2^1\frac{18!}{19!}-\binom{10}{2}2^2\frac{17!}{19!}+\cdots-\binom{10}{10}2^{10}\frac{9!}{19!} \\
+	&=\sum_{i=1}^{10}\binom{10}{i}2^i\frac{(19-i)!}{19!}
+	\end{aligned}
+	\end{equation}
+	所以我们可以得到所有的妻子都不坐在她丈夫旁边的概率为：
+	\begin{equation}
+	P=1-\sum_{i=1}^{10}\binom{10}{i}2^i\frac{(19-i)!}{19!}\approx 0.3395
+	\end{equation}
+\end{proof}
+
 \item {\hei 重新考虑匹配问题。n个人随机地选取帽子，试问恰好有k人戴上了自己帽子的概率是多少。}
 \begin{proof}[解]
 	考虑戴上了自己帽子的k个人，第一个人戴对的概率是$1/n$;第二个人受到了第一个人戴对的条件限制，戴对的概率是$1/(n−1)$，以此类推，得到
@@ -147,6 +176,96 @@
 	考虑到戴对帽子的$k$个人的任意性，最终所求概率为：
 	\begin{equation}
 	P=\binom{n}{k}P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{1}{k!}\sum_{j=2}^{n}\frac{(-1)^{j}}{j!}
+	\end{equation}
+\end{proof}
+
+\item {\hei 某罪犯在犯罪现场留下了一些DNA，法医研究后注意到能够辨认的只有5对，而且每个无罪的人，与这5对相匹配的概率为$10^{-5}$，律师认为罪犯就是该城镇1 000 000个居民之一。在过去10年内，该城镇有10000人刑满释放，他们的DNA资料都记录在案，律师认为这10000个有犯罪前科的人犯此罪的概率为$\alpha$，而其余990000个居民中每个人犯此罪的概率为$\beta$，其中$\alpha=c\beta$.(即他认为最近10年内释放的有犯罪前科的人作案的可能性是其他人的c倍。)将DNA分析结果同这10000个有犯罪前科的人的数据文档对比后，发现只有AJ琼斯的DNA符合。假设律师关于$\alpha$和$\beta$的关系是准确的，AJ作案的可能性有多大？}
+\begin{proof}[解]
+	首先，概率之和必等于1，我们有：
+	\begin{equation}
+	1=10000\alpha+990000\beta=(10000c+990000)\beta
+	\end{equation}
+	因此：
+	\begin{equation}
+	\beta=\frac{1}{10000c+990000},\alpha=\frac{c}{10000c+990000}
+	\end{equation}
+	令$G$表示事件“AJ为作案者”，令M表示事件“AJ是这10000人中唯一与现场DNA相匹配的人”。那么：
+	\begin{equation}
+	P(G|M)=\frac{P(GM)}{P(M)}=\frac{P(M|G)P(G)}{P(M|G)P(G)+P(M|G^c)P(G^c)}
+	\end{equation}
+	如果AJ为作案者，那么其他9999个人都不是作案者，那么我们有：
+	\begin{equation}
+	P(M|G)=(1-10^{-5})^{9999},P(G)=\alpha
+	\end{equation}
+	如果AJ不是作案者，若是他的DNA唯一匹配，那么其他9999个有前科的人一定不是作案者且都不是匹配者，因此作案者便出现在没有前科的人中。令$C=$\{除AJ外，其他有前科的人都不是作案者\}，此时我们有：
+	\begin{equation}
+	P(C|G^c)=\frac{P(CG^c)}{G^c}=\frac{1-10000\alpha}{1-\alpha}
+	\end{equation}
+	同样，在除AJ外，其他有前科的人不是作案者的前提下，这9999个人与现场DNA不匹配的概率为$(1-10^{-5})^{9999}$，所以
+	\begin{equation}
+	P(M|G^c)=10^{-5}(1-10^{-5})^{9999}\frac{1-10000\alpha}{1-\alpha},P(G^c)=1-\alpha
+	\end{equation}
+	带入得：
+	\begin{equation}
+	P(G|M)=\frac{\alpha}{\alpha+10^{-5}(1-10000\alpha)}=\frac{1}{0.9+\frac{10^{-5}}{\alpha}}
+	\end{equation}
+	下面我们同样进行一些有趣的计算。如果律师认为任一有犯罪前科的人作案的可能性是没有犯罪前科的人的100倍(即c=100)，那么$\alpha=1/19900$，且：
+	\begin{equation}
+	P(G|M)=\frac{1}{1.099}\approx 0.9099
+	\end{equation}
+	如果律师最初认为c=10，那么$\alpha=1/109000$，且：
+	\begin{equation}
+	P(G|M)=\frac{1}{1.99}\approx 0.5025
+	\end{equation}
+	如果律师最初认为c=1，即认为有犯罪前科的人作案的可能性与镇里其他人是相同的，那么$\alpha=10^{-6}$，且：
+	\begin{equation}
+	P(G|M)=\frac{1}{10.9}\approx 0.0917
+	\end{equation}
+\end{proof}
+
+\item {\hei (选择题设置选项问题)考试题目中有一道选择题，学生会做的概率是$p$。如果会做，那么做对的概率为$q$，如果不会做，那么学生将会在n个答案中随机选取。假如判卷时发现某学生给出的答案是正确的，那么该生的确会做这道题的概率是多少呢？从中可以得到什么结论呢？}
+\begin{proof}[解]
+	设事件$A$表示学生的确会做该题目，事件C表示学生给出了正确答案，那么根据Bayesian公式：
+	\begin{equation}
+	P(A|C)=\frac{P(C|A)P(A)}{P(C|A)P(A)+P(C|A^c)P(A^c)}
+	\end{equation}
+	带入$P(C|A)=q,P(C|A^c)=1/n$得：
+	\begin{equation}
+	P(A|C)=\frac{pq}{pq+(1-p)/n}
+	\end{equation}
+	假设$q=1$(学生们都非常细心，会做的题目都不会错)，那么：
+	\begin{equation}
+	P(A|C)=\frac{np}{1+(n-1)p}
+	\end{equation}
+	在这种情况下如果令$P(A|C)=\frac{1}{n}$(即“瞎蒙”和“会做”的概率相等)，那么有：
+	\begin{equation}
+	p=\frac{1}{n^2-n+1}
+	\end{equation}
+	这说明，选择题的选项设置不能太少，假如$n=2$，那么只要题目稍难(1/3的学生会做,p=1/3)，那么答案正确的情况下，会做和随机选取的概率一样，即“瞎蒙”和“会做”没有分别。另一方面，题目不能出的太难，以$n=4$(通常的选择题)为例，如果会做的同学少于$1/13\approx 7\%$，那么单纯从卷面答案上仍无法区分“瞎蒙”和“会做”。所以，良好的选择题设计要经过认真的考虑。
+\end{proof}
+
+\item {\hei 有3个付费公用电话，每次打电话需投币1元，但是投币后，A电话始终正常工作，B电话无法正常工作，C电话以1/2的概率正常工作。三部电话都不会退币。如果你只有2元，那么采用什么样的策略，能够让你成功打出电话的概率尽可能大呢？此时打通电话的概率为多少？}
+
+\begin{proof}[解]
+	首先第一次随机选择一个电话进行拨打，如果成功那么试验结束。第一次实验成功的概率为：
+	\begin{equation}
+	p_1=\frac{1}{3}\times 1+\frac{1}{3}\times\frac{1}{2}=\frac{1}{2}
+	\end{equation}
+	若失败，则该电话为B的概率为：
+	\begin{equation}
+	p_B=\frac{1\times\frac{1}{3}}{\frac{1}{3}\times(0+\frac{1}{2}+1)}=\frac{2}{3}
+	\end{equation}
+	那么，该电话为C的概率为$1/3$.如果第二次继续选择该电话，那么打通电话的概率为：
+	\begin{equation}
+	P_1=\frac{2}{3}\times 0+\frac{1}{3}\times \frac{1}{2}=\frac{1}{6}
+	\end{equation}
+	如果随机选择另外一部电话，则打通电话的概率为：
+	\begin{equation}
+	P_2=\frac{2}{3}\left(\frac{1}{2}\times 1+\frac{1}{2}\times \frac{1}{2}\right)+\frac{1}{3}\left(\frac{1}{2}\times 0+\frac{1}{2}\times 1\right)=\frac{2}{3}
+	\end{equation}
+	由于$P_1<P_2$，因此我们的最优策略为：第一次随机选择一个电话拨打，若成功则停止，若失败，则第二次选择另外两台中的一台进行拨打。在此策略下，最终打通电话的概率为：
+	\begin{equation}
+	P=p_1+(1-p_1)\times P_2=\frac{5}{6}
 	\end{equation}
 \end{proof}
 \end{enumerate}
