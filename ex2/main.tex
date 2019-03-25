@@ -80,7 +80,7 @@
 	\begin{equation}
 	E(H_iH_j)=1\times P(H_iH_j=1)+0\times P(H_iH_j=0)=\frac{1}{n(n-1)}
 	\end{equation}
-	带入\ref{eq1}得：
+	带入式(\ref{eq1})中得：
 	\begin{equation}
 	E(X^2)=n\times\frac{1}{n}+n(n-1)\times\frac{1}{n(n-1)}=2
 	\end{equation}
@@ -235,7 +235,79 @@
 	\end{equation}
 	
 	{\hei 注意}：这里的随机取点认为是两者所对的圆心角(取范围$[0,\pi]$)服从均匀分布，若选用其他方式，例如弦中点到圆心的距离服从均匀分布，则会得到不同的结果，这与Bertrand悖论的道理是相同的，即不同的样本空间会导致不同的结果。
+\end{proof}
 
+\item {\hei 假设$\lambda$服从以$\alpha,\beta$为参数的Gamma分布，即$\lambda\sim \Gamma(\lambda|\alpha,\beta)$。在给定$\lambda$的条件下，$x$服从以$\lambda$为参数的Poisson的分布，即$x|\lambda\sim Poisson(x|\lambda)$。试问，在给定$x$的条件下，$\lambda$的分布是什么？}
+
+\item {\hei 司机在一年发生事故的次数满足$\lambda$的泊松分布，而$\lambda$服从参数为$\mu$的指数分布，问某一司机上一年不发生事故，今年也不发生事故的概率。}
+\begin{proof}[解]
+	假设该司机在一年发生事故的次数为$X$，则有：
+	\begin{equation}
+	\begin{aligned}
+	P(X=k)&=\int_{0}^{+\infty}P(X=k|\lambda=x)f_{\lambda}(x)dx \\
+	&=\int_{0}^{+\infty}\frac{x^ke^{-x}}{k!}\mu e^{-\mu x}dx \\
+	&=\frac{\mu}{k!}\int_{0}^{+\infty}x^ke^{-(\mu+1)x}dx \\
+	&=\frac{\mu}{k!}\frac{\Gamma(k+1)}{(\mu+1)^{k+1}} \\
+	&=\frac{\mu}{(\mu+1)^{k+1}}
+	\end{aligned}
+	\end{equation}
+	因此，司机连续两年不发生事故的概率为(两年发生事故相互独立)：
+	\begin{equation}
+	P=\left(\frac{\mu}{\mu+1}\right)^2
+	\end{equation}
+\end{proof}
+
+\item {\hei 公交站起点站等可能发出$a,b$两班汽车，其中$a$停$m$站，$b$停$n$站，车上人数服从参数为$\lambda$的泊松分布，每名乘客在各站下车的概率相同，如果该站没有乘客下车，则公交车不停站。求一辆从起点站开出的公交车停站的期望。}
+\begin{proof}[解]
+	一辆从起点站开出的公交车停站的次数$X$的期望满足：
+	\begin{equation}
+	E(X)=\frac{1}{2}E(X_a)+\frac{1}{2}E(X_b)
+	\end{equation}
+	其中，$X_a$表示如果开出的是$a$车停站的次数，$X_b$表示如果开出的是$b$车停站的次数。对$a$车和$b$车的讨论类似，我们这里这讨论$a$车的情况。我们有：
+	\begin{equation}
+	X_a=X_{a1}+X_{a2}+\cdots+X_{am},\quad X_{at}=\left\{
+	\begin{array}{cc}
+	1 & \mbox{第$t$站有人下车}\\
+	0 & \mbox{第$t$站没有人下车}
+	\end{array}
+	\right.
+	\end{equation}
+	由于人数$K$服从参数为$\lambda$的泊松分布，则有：
+	\begin{equation}
+	P(X_{at}=1|K=k)=1-P(X_{at}=0)=1-\left(1-\frac{1}{m}\right)^k
+	\end{equation}
+	所以：
+	\begin{equation}
+	\begin{aligned}
+	E(X_{at}|K=k)&=1\times P(X_{at}=1|K=k)+0\times P(X_{at}=0|K=k) \\
+	&=1-\left(1-\frac{1}{m}\right)^k
+	\end{aligned}
+	\end{equation}
+	因此：
+	\begin{equation}
+	\begin{aligned}
+	E(X_{at})&=E(E(X_{at}|K=k)) \\
+	&=\sum_{k=0}^{+\infty}E(X_{at}|K=k)P(K=k) \\
+	&=\sum_{k=0}^{+\infty}\left(1-\left(1-\frac{1}{m}\right)^k\right)\frac{\lambda^ke^{-\lambda}}{k!} \\
+	&=1-e^{-\frac{\lambda}{m}}
+	\end{aligned}
+	\end{equation}
+	所以我们可以得到：
+	\begin{equation}
+	\begin{aligned}
+	E(X_a)&=E(X_{a1}+X_{a2}+\cdots+X_{am}) \\
+	&=E(X_{a1})+E(X_{a2})+\cdots+E(X_{am}) \\
+	&=m\left(1-e^{-\frac{\lambda}{m}}\right)
+	\end{aligned}
+	\end{equation}
+	同理我们可以得到：
+	\begin{equation}
+	E(X_b)=n\left(1-e^{-\frac{\lambda}{n}}\right)
+	\end{equation}
+	所以：
+	\begin{equation}
+	E(X)=\frac{1}{2}\left(m\left(1-e^{-\frac{\lambda}{m}}\right)+n\left(1-e^{-\frac{\lambda}{n}}\right)\right)
+	\end{equation}
 \end{proof}
 \end{enumerate}
 
