@@ -31,11 +31,120 @@
 % ========== Begin answering questions here
 \begin{enumerate}
 
-\item {\hei }
+\item {\hei 再次考虑“匹配”问题。$n$个人随机地选取帽子，试问恰好戴上了自己帽子的人数的期望是多少。}
 
 \begin{proof}[解]
-	
+	带上自己帽子的人数$X$满足:
+	\begin{equation}
+	X=H_1+H_2+\cdots+H_n,\quad H_k=\left\{
+	\begin{array}{cc}
+	1 & \mbox{第$k$个人戴对帽子}\\
+	0 & \mbox{第$k$个人戴错帽子}
+	\end{array}
+	\right.
+	\end{equation}
+	则由\begin{equation}
+	P(H_k=1)=1-P(H_k=0)=\frac{1}{n}
+	\end{equation}
+	得到\begin{equation}
+	E(H_k)=1\times P(H_k=1)+0\times P(H_k=0)=\frac{1}{n}
+	\end{equation}
+	从而\begin{equation}
+	\begin{aligned}
+	E(X)&=E(H_1+H_2+\cdots+H_n)\\
+	&=E(H_1)+E(H_2)+\cdots+E(H_n) \\
+	&=n\times \frac{1}{n} \\
+	&=1
+	\end{aligned}
+	\end{equation}
+	即戴上自己帽子的人数的期望值为1。也就是说，平均只有一个人戴上自己的帽子。相比于上次习题课得到的人数分布的结果，这里给出的期望能够更加直观地表明恰好匹配(戴上自己的帽子)是较为困难的事情。
+\end{proof}
+
+\item {\hei n对夫妇共2n人呆在一个房间内，现从中随机挑选m个人走出房间，问房间内还剩下的未被拆散的夫妇数目的均值。}
+\begin{proof}[解]
+	房间内剩下的未被拆散的夫妇数目$X$满足
+	\begin{equation}
+	X=C_1+C_2+\cdots+C_n,\quad C_k=\left\{
+	\begin{array}{cc}
+	1 & \mbox{第$k$对夫妇在房间}\\
+	0 & \mbox{第$k$对夫妇不在房间}
+	\end{array}
+	\right.
+	\end{equation}
+	则由\begin{equation}
+	P(C_k=1)=1-P(C_k=0)=\frac{\binom{2n-2}{m}}{\binom{2n}{m}}=\left(1-\frac{m}{2n}\right)\left(1-\frac{m}{2n-1}\right)
+	\end{equation}
+	得到\begin{equation}
+	E(C_k)=1\times P(C_k=1)+0\times P(C_k=0)=\left(1-\frac{m}{2n}\right)\left(1-\frac{m}{2n-1}\right)
+	\end{equation}
+	从而\begin{equation}
+	\begin{aligned}
+	E(X)&=E(H_1+H_2+\cdots+H_n)\\
+	&=E(H_1)+E(H_2)+\cdots+E(H_n) \\
+	&=n\times \left(1-\frac{m}{2n}\right)\left(1-\frac{m}{2n-1}\right)
+	\end{aligned}
+	\end{equation}
+\end{proof}
+
+\item {\hei 某商场发行$n$种购物券，每一次在该商场购物，即可获得一张种类随机选取的购物券。该商场规定，如果能够收集齐所有的购物券，那么就可以得到该商场的大奖。问获得大奖所需要的购物次数的期望是多少。}
+
+\begin{proof}[解]
+	收集齐所有的购物券所需要的购物次数$X$可以写为
+	\begin{equation}
+	X=C_1+C_2+\cdots+C_n
+	\end{equation}
+	其中$C_k$表示在收集到$k-1$种购物券的前提下，收集到第$k$种购物券所需要的购物次数。由于手中已经有$k-1$种购物券，因此收集到新购物券的可能只有$n-k+1$种，所以$C_k$是几何分布随机变量，参数为$p=(n-k+1)/n$，因此我们有：
+	\begin{equation}
+	E(C_k)=\frac{1}{p}=\frac{n}{n-k+1}
+	\end{equation}
+	所以：
+	\begin{equation}
+	\begin{aligned}
+	E(X)&=E(C_1+C_2+\cdots+C_n)\\
+	&=E(C_1)+E(C_2)+\cdots+E(C_n) \\
+	&=1+\frac{n}{n-1}+\frac{n}{n-2}+\cdots+\frac{n}{1} \\
+	&=n\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)
+	\end{aligned}
+	\end{equation}
+	由微积分的知识可以知道$E(X)\approx n\ln n$，可见，当$n$较大时，如果想收集到所有的购物券，则需要付出数倍于购物券数目的购物次数(以30张购物券为例，$\ln(30)\approx3.4$) 。这正是商家的精明之处。
+\end{proof}
+
+\item {\hei 设$R$罐中有$n$个红球，$H$罐中有$n$个黑球。每次操作都从两个罐中各随机取出一球，交换放置($R$罐中取出的放入$H$罐，$H$罐中取出的放入$R$罐)，问$k$次操作后，$R$罐中的红球数目的均值。}
+
+\begin{proof}[解]
+	$k$次操作后$R$罐的红球数目满足：
+	\begin{equation}
+	X=R_1+R_2+\cdots+R_n,\quad R_t=\left\{
+	\begin{array}{cc}
+	1 & \mbox{第$t$个红球仍在$R$罐}\\
+	0 & \mbox{第$t$对夫妇不在$R$罐}
+	\end{array}
+	\right.
+	\end{equation}
+	对于操作开始前$R$罐中原有的每一个红球而言，其经过$k$次操作仍回到$R$罐意味着被选中的次数为偶数(从来未被选中意味着选中次数为0，仍为偶数)。所以：
+	\begin{equation}
+	P(R_t=1)=1-P(R_t=0)=\sum_{m=2i}\binom{k}{m}\left(\frac{1}{n}\right)^m\left(1-\frac{1}{n}\right)^{k-m}
+	\end{equation}
+	根据二项式定理，我们可以计算出偶数次项的和可以计算如下：
+	\begin{equation}
+	\sum_{m=2i}\binom{k}{m}a^mb^{k-m}=\frac{1}{2}\left(\left(b+a\right)^k+\left(b-a\right)^k\right)
+	\end{equation}
+	所以：
+	\begin{equation}\begin{aligned}
+	P(R_t=1)&=\frac{1}{2}\left(\left(1-\frac{1}{n}+\frac{1}{n}\right)^k+\left(1-\frac{1}{n}-\frac{1}{n}\right)^k\right) \\
+	&=\frac{1}{2}\left(1+\left(1-\frac{2}{n}\right)^k\right) 
+	\end{aligned}
+	\end{equation}
+	从而
+	\begin{equation}
+	\begin{aligned}
+	E(X)&=E(R_1+R_2+\cdots+R_n) \\
+	&=E(R_1)+E(R_2)+\cdots+E(R_n) \\
+	&=\frac{n}{2}\left(1+\left(1-\frac{2}{n}\right)^k\right)
+	\end{aligned}
+	\end{equation}
 \end{proof}
 \end{enumerate}
+
 
 \end{document}

@@ -125,6 +125,8 @@
 	\end{aligned}
 	\end{equation}
 	即，至少有一人带上自己帽子的概率为$\sum_{k=1}^{n}\frac{(-1)^{k+1}}{k!}$
+	
+	{\hei 本题也可以使用递归的方法解决，习题课上已经讲解，同学们可以自己尝试}
 \end{proof}
 
 \item {\hei （匹配问题2）10对夫妇坐一圈，计算所有的妻子都不坐在她丈夫旁边的概率}
@@ -167,15 +169,15 @@
 	\end{equation}
 	另一方面，在$k$个人戴对的情况下，剩下$n-k$个人都没有戴对，根据之前的结论，我们有：
 	\begin{equation}
-	P(B_1B_2\cdots B_{n-k}|A_1A_2\cdots A_k)=\sum_{j=0}^{n}\frac{(-1)^{j}}{j!}
+	P(B_1B_2\cdots B_{n-k}|A_1A_2\cdots A_k)=\sum_{j=0}^{n-k}\frac{(-1)^{j}}{j!}
 	\end{equation}
 	则有：
 	\begin{equation}
-	P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{(n-k)!}{n!}\sum_{j=0}^{n}\frac{(-1)^{j}}{j!}
+	P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{(n-k)!}{n!}\sum_{j=0}^{n-k}\frac{(-1)^{j}}{j!}
 	\end{equation}
 	考虑到戴对帽子的$k$个人的任意性，最终所求概率为：
 	\begin{equation}
-	P=\binom{n}{k}P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{1}{k!}\sum_{j=2}^{n}\frac{(-1)^{j}}{j!}
+	P=\binom{n}{k}P(A_1A_2\cdots A_kB_1B_2\cdots B_{n-k})=\frac{1}{k!}\sum_{j=0}^{n-k}\frac{(-1)^{j}}{j!}
 	\end{equation}
 \end{proof}
 
