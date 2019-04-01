@@ -238,7 +238,29 @@
 \end{proof}
 
 \item {\hei 假设$\lambda$服从以$\alpha,\beta$为参数的Gamma分布，即$\lambda\sim \Gamma(\lambda|\alpha,\beta)$。在给定$\lambda$的条件下，$x$服从以$\lambda$为参数的Poisson的分布，即$x|\lambda\sim Poisson(x|\lambda)$。试问，在给定$x$的条件下，$\lambda$的分布是什么？}
-
+\begin{proof}[解]
+	由于 $\lambda \sim \Gamma(\lambda|\alpha,\beta)$, 我们有:
+	\begin{equation}
+	p(\lambda)=\dfrac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}
+	\end{equation}
+	又由于 $x|\lambda \sim Poisson(x|\lambda)$, 因而:
+	\begin{equation}
+	p(x|\lambda)=\frac{\lambda^x}{x!}e^{-\lambda}
+	\end{equation}
+	所以，根据贝叶斯公式:
+	\begin{equation}
+	\begin{aligned}
+	p(\lambda|x)&=\dfrac{p(x|\lambda)p(\lambda)}{p(x)} \\
+	&=\dfrac{p(x|\lambda)p(\lambda)}{\int_{0}^{+\infty}p(x|\lambda)p(\lambda)\mathrm{d}\lambda} \\
+	&=\dfrac{\frac{\lambda^x}{x!}e^{-\lambda}\cdot\dfrac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}}{\int_{0}^{+\infty}\frac{\lambda^x}{x!}e^{-\lambda}\cdot\dfrac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\mathrm{d}\lambda} \\
+	&=\dfrac{\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\int_{0}^{+\infty}\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}\mathrm{d}\lambda} \\
+	&=\dfrac{\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\int_{0}^{+\infty}\left(\frac{u}{\beta+1}\right)^{(\alpha+x-1)}e^{-u}\mathrm{d}\left(\frac{u}{\beta+1}\right)} \qquad (u=(\beta+1)\lambda) \\
+	&=\dfrac{\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\frac{1}{(\beta+1)^{\alpha+x}}\int_{0}^{+\infty}u^{(\alpha+x-1)}e^{-u}\mathrm{d}u} \\
+	&=\dfrac{(\beta+1)^{\alpha+x}\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\Gamma(\alpha+x)}
+	\end{aligned}
+	\end{equation}
+	所以, $\lambda|x \sim \Gamma(\lambda|\alpha+x,\beta+1)$
+\end{proof}
 \item {\hei 司机在一年发生事故的次数满足$\lambda$的泊松分布，而$\lambda$服从参数为$\mu$的指数分布，问某一司机上一年不发生事故，今年也不发生事故的概率。}
 \begin{proof}[解]
 	假设该司机在一年发生事故的次数为$X$，则有：
