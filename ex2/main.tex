@@ -10,8 +10,10 @@
 \usepackage{tikz}
 \usepackage{enumerate} 
 \usepackage{fontspec}
+%\usepackage{setspace}
 
 \newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+%\renewcommand{\baselinestretch}{1.0}
 
 \topmargin -.5in
 \textheight 9in
@@ -22,7 +24,7 @@
 \begin{document}
 %\newfontfamily{\Hei}{SimHei}
 % ========== Edit your name here
-\author{罗雁天}
+\author{闻健}
 \title{习题课2}
 \maketitle
 
@@ -31,151 +33,7 @@
 % ========== Begin answering questions here
 \begin{enumerate}
 
-\item {\hei 再次考虑“匹配”问题。$n$个人随机地选取帽子，试问恰好戴上了自己帽子的人数的期望和方差是多少。}
-
-\begin{proof}[解]
-	带上自己帽子的人数$X$满足:
-	\begin{equation}
-	X=H_1+H_2+\cdots+H_n,\quad H_k=\left\{
-	\begin{array}{cc}
-	1 & \mbox{第$k$个人戴对帽子}\\
-	0 & \mbox{第$k$个人戴错帽子}
-	\end{array}
-	\right.
-	\end{equation}
-	则由\begin{equation}
-	P(H_k=1)=1-P(H_k=0)=\frac{1}{n}
-	\end{equation}
-	得到\begin{equation}
-	E(H_k)=1\times P(H_k=1)+0\times P(H_k=0)=\frac{1}{n}
-	\end{equation}
-	从而\begin{equation}
-	\begin{aligned}
-	E(X)&=E(H_1+H_2+\cdots+H_n)\\
-	&=E(H_1)+E(H_2)+\cdots+E(H_n) \\
-	&=n\times \frac{1}{n} \\
-	&=1
-	\end{aligned}
-	\end{equation}
-	即戴上自己帽子的人数的期望值为1。也就是说，平均只有一个人戴上自己的帽子。相比于上次习题课得到的人数分布的结果，这里给出的期望能够更加直观地表明恰好匹配(戴上自己的帽子)是较为困难的事情。
-	
-	接下来求方差，首先求$E(X^2)$如下：
-	\begin{equation}
-	\label{eq1}
-	\begin{aligned}
-	E(X^2)&=E\left((H_1+H_2+\cdots+H_n)^2\right) \\
-	&=E\left(\sum_{k=1}^{n}H_k^2+\sum_{i=1}^{n}\sum_{j\ne i}H_iH_j\right) \\
-	&=\sum_{k=1}^nE(H_k^2)+\sum_{i=1}^{n}\sum_{j\ne i}E(H_iH_j)
-	\end{aligned}
-	\end{equation}
-	根据我们的定义，我们可以得到：
-	\begin{equation}
-	E(H_k^2)=1\times P(H_k=1)+0\times P(H_k=0)=\frac{1}{n}
-	\end{equation}
-	$H_iH_j$表示第$i,j$两人均带对帽子，因此：
-	\begin{equation}
-	P(H_iH_j=1)=1-P(H_iH_j=0)=\frac{1}{n(n-1)}
-	\end{equation}
-	因此：
-	\begin{equation}
-	E(H_iH_j)=1\times P(H_iH_j=1)+0\times P(H_iH_j=0)=\frac{1}{n(n-1)}
-	\end{equation}
-	带入式(\ref{eq1})中得：
-	\begin{equation}
-	E(X^2)=n\times\frac{1}{n}+n(n-1)\times\frac{1}{n(n-1)}=2
-	\end{equation}
-	因此：
-	\begin{equation}
-	Var(X)=E(X^2)-\left[E(X)\right]^2=1
-	\end{equation}
-\end{proof}
-
-\item {\hei n对夫妇共2n人呆在一个房间内，现从中随机挑选m个人走出房间，问房间内还剩下的未被拆散的夫妇数目的均值。}
-\begin{proof}[解]
-	房间内剩下的未被拆散的夫妇数目$X$满足
-	\begin{equation}
-	X=C_1+C_2+\cdots+C_n,\quad C_k=\left\{
-	\begin{array}{cc}
-	1 & \mbox{第$k$对夫妇在房间}\\
-	0 & \mbox{第$k$对夫妇不在房间}
-	\end{array}
-	\right.
-	\end{equation}
-	则由\begin{equation}
-	P(C_k=1)=1-P(C_k=0)=\frac{\binom{2n-2}{m}}{\binom{2n}{m}}=\left(1-\frac{m}{2n}\right)\left(1-\frac{m}{2n-1}\right)
-	\end{equation}
-	得到\begin{equation}
-	E(C_k)=1\times P(C_k=1)+0\times P(C_k=0)=\left(1-\frac{m}{2n}\right)\left(1-\frac{m}{2n-1}\right)
-	\end{equation}
-	从而\begin{equation}
-	\begin{aligned}
-	E(X)&=E(C_1+C_2+\cdots+C_n)\\
-	&=E(C_1)+E(C_2)+\cdots+E(C_n) \\
-	&=n\times \left(1-\frac{m}{2n}\right)\left(1-\frac{m}{2n-1}\right)
-	\end{aligned}
-	\end{equation}
-\end{proof}
-
-\item {\hei 某商场发行$n$种购物券，每一次在该商场购物，即可获得一张种类随机选取的购物券。该商场规定，如果能够收集齐所有的购物券，那么就可以得到该商场的大奖。问获得大奖所需要的购物次数的期望是多少。}
-
-\begin{proof}[解]
-	收集齐所有的购物券所需要的购物次数$X$可以写为
-	\begin{equation}
-	X=C_1+C_2+\cdots+C_n
-	\end{equation}
-	其中$C_k$表示在收集到$k-1$种购物券的前提下，收集到第$k$种购物券所需要的购物次数。由于手中已经有$k-1$种购物券，因此收集到新购物券的可能只有$n-k+1$种，所以$C_k$是几何分布随机变量，参数为$p=(n-k+1)/n$，因此我们有：
-	\begin{equation}
-	E(C_k)=\frac{1}{p}=\frac{n}{n-k+1}
-	\end{equation}
-	所以：
-	\begin{equation}
-	\begin{aligned}
-	E(X)&=E(C_1+C_2+\cdots+C_n)\\
-	&=E(C_1)+E(C_2)+\cdots+E(C_n) \\
-	&=1+\frac{n}{n-1}+\frac{n}{n-2}+\cdots+\frac{n}{1} \\
-	&=n\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)
-	\end{aligned}
-	\end{equation}
-	由微积分的知识可以知道$E(X)\approx n\ln n$，可见，当$n$较大时，如果想收集到所有的购物券，则需要付出数倍于购物券数目的购物次数(以30张购物券为例，$\ln(30)\approx3.4$) 。这正是商家的精明之处。
-\end{proof}
-
-\item {\hei 设$R$罐中有$n$个红球，$H$罐中有$n$个黑球。每次操作都从两个罐中各随机取出一球，交换放置($R$罐中取出的放入$H$罐，$H$罐中取出的放入$R$罐)，问$k$次操作后，$R$罐中的红球数目的均值。}
-
-\begin{proof}[解]
-	$k$次操作后$R$罐的红球数目满足：
-	\begin{equation}
-	X=R_1+R_2+\cdots+R_n,\quad R_t=\left\{
-	\begin{array}{cc}
-	1 & \mbox{第$t$个红球仍在$R$罐}\\
-	0 & \mbox{第$t$对夫妇不在$R$罐}
-	\end{array}
-	\right.
-	\end{equation}
-	对于操作开始前$R$罐中原有的每一个红球而言，其经过$k$次操作仍回到$R$罐意味着被选中的次数为偶数(从来未被选中意味着选中次数为0，仍为偶数)。所以：
-	\begin{equation}
-	P(R_t=1)=1-P(R_t=0)=\sum_{m=2i}\binom{k}{m}\left(\frac{1}{n}\right)^m\left(1-\frac{1}{n}\right)^{k-m}
-	\end{equation}
-	根据二项式定理，我们可以计算出偶数次项的和可以计算如下：
-	\begin{equation}
-	\sum_{m=2i}\binom{k}{m}a^mb^{k-m}=\frac{1}{2}\left(\left(b+a\right)^k+\left(b-a\right)^k\right)
-	\end{equation}
-	所以：
-	\begin{equation}\begin{aligned}
-	P(R_t=1)&=\frac{1}{2}\left(\left(1-\frac{1}{n}+\frac{1}{n}\right)^k+\left(1-\frac{1}{n}-\frac{1}{n}\right)^k\right) \\
-	&=\frac{1}{2}\left(1+\left(1-\frac{2}{n}\right)^k\right) 
-	\end{aligned}
-	\end{equation}
-	从而
-	\begin{equation}
-	\begin{aligned}
-	E(X)&=E(R_1+R_2+\cdots+R_n) \\
-	&=E(R_1)+E(R_2)+\cdots+E(R_n) \\
-	&=\frac{n}{2}\left(1+\left(1-\frac{2}{n}\right)^k\right)
-	\end{aligned}
-	\end{equation}
-\end{proof}
-
-\item {\hei 设随机变量$X\sim N(0,\sigma^2),Y=[X]$，即$Y$是$X$的整数部分（例如：$[1.2]=1,[-2.3]=-3$），计算$Y$的期望}
+\item {\hei 设随机变量$X\sim N(0,\sigma^2),Y=[X]$，即$Y$是$X$向下取整所得（例如：$[1.2]=1,[-2.3]=-3$），计算$Y$的期望。}
 \begin{proof}[解]
 	设$X$的分布函数为$f_X(x)$，$Y$是整数集上的离散随机变量，我们有：
 	\begin{equation}
@@ -184,52 +42,23 @@
 	考虑到$f_X(x)$是偶函数，所以:
 	\begin{equation}
 	\begin{aligned}
-	E(Y)&=\sum_{n=-\infty}^{+\infty}n\times P(y=n) \\
-	&=\sum_{n=-\infty}^{+\infty}n\times\int_{n}^{n+1}f_X(x)dx \\
-	&=\int_{1}^{2}f_X(x)dx+2\int_{2}^{3}f_X(x)dx+\cdots\\
-	&-\int_{0}^{1}f_X(x)dx-2\int_{1}^{2}f_X(x)dx-3\int_{2}^{3}f_X(x)dx-\cdots \\
-	&=-\int_{0}^{+\infty}f_X(x)dx \\
-	&=-\frac{1}{2}
+		E(Y)&=\sum_{n=-\infty}^{+\infty}n\times P(y=n) \\
+		&=\sum_{n=-\infty}^{+\infty}n\times\int_{n}^{n+1}f_X(x)dx \\
+		&=\int_{1}^{2}f_X(x)dx+2\int_{2}^{3}f_X(x)dx+\cdots\\
+		&-\int_{0}^{1}f_X(x)dx-2\int_{1}^{2}f_X(x)dx-3\int_{2}^{3}f_X(x)dx-\cdots \\
+		&=-\int_{0}^{+\infty}f_X(x)dx \\
+		&=-\frac{1}{2}
 	\end{aligned}
 	\end{equation}
 \end{proof}
 
-\item {\hei 设有$k$种不同的优惠券，每次收集到第$i$种优惠券的概率为$p_i$，$\sum_{i=1}^kp_i=1$，且每次收集之间是相互独立的。如果收集了$n$张优惠券，那么优惠券的种类的期望是多少？}
-\begin{proof}[解]
-	优惠券的种类数$X$满足:
-	\begin{equation}
-	X=H_1+H_2+\cdots+H_k,\quad H_i=\left\{
-	\begin{array}{cc}
-	1 & \mbox{收集到第$i$种优惠券}\\
-	0 & \mbox{没有收集到第$i$种优惠券}
-	\end{array}
-	\right.
-	\end{equation}
-	那么我们有：
-	\begin{equation}
-	P(H_i=1)=1-P(H_i=0)=1-(1-p_i)^n
-	\end{equation}
-	所以：
-	\begin{equation}
-	E(H_i)=1\times P(H_i=1)+0\times P(H_i=0)=1-(1-p_i)^n
-	\end{equation}
-	从而：
-	\begin{equation}
-	\begin{aligned}
-		E(X)&=E(H_1+H_2+\cdots+H_k)\\
-		&=E(H_1)+E(H_2)+\cdots+E(H_k) \\
-		&=\sum_{i=1}^{k}\left(1-(1-p_i)^n\right)
-	\end{aligned}
-	\end{equation}
-\end{proof}
-
-\item {\hei 在单位圆上随机取两个点构成一条弦，试计算从原点到该弦的距离所服从的概率密度函数}
+\item {\hei 在单位圆上随机取两个点构成一条弦，试计算从原点到该弦的距离所服从的概率密度函数。}
 \begin{proof}[解]
 	设两点对圆心的张角为$\theta$，则$\theta\sim U(0,\pi)$，我们有：
 	\begin{equation}
 	f_\theta(\theta)=\frac{1}{\pi}
 	\end{equation}
-	设从原点到弦的距离为$r$，则$r=\cos\left(\frac{\theta}{2}\right)$。由于在$\theta\in[0,\pi],r\in[0,1]$时，$r$是$\theta$的单调函数，于是：
+	设从原点到弦的距离为$r$，则$r=\cos\left(\displaystyle{\frac{\theta}{2}}\right)$。由于在$\theta\in[0,\pi],r\in[0,1]$时，$r$是$\theta$的单调函数，于是：
 	\begin{equation}
 	f_r(r)=f_\theta(\theta)\left|\frac{d\theta}{dr}\right|=\frac{2}{\pi\sqrt{1-r^2}},r\in[0,1]
 	\end{equation}
@@ -237,101 +66,221 @@
 	{\hei 注意}：这里的随机取点认为是两者所对的圆心角(取范围$[0,\pi]$)服从均匀分布，若选用其他方式，例如弦中点到圆心的距离服从均匀分布，则会得到不同的结果，这与Bertrand悖论的道理是相同的，即不同的样本空间会导致不同的结果。
 \end{proof}
 
-\item {\hei 假设$\lambda$服从以$\alpha,\beta$为参数的Gamma分布，即$\lambda\sim \Gamma(\lambda|\alpha,\beta)$。在给定$\lambda$的条件下，$x$服从以$\lambda$为参数的Poisson的分布，即$x|\lambda\sim Poisson(x|\lambda)$。试问，在给定$x$的条件下，$\lambda$的分布是什么？}
+
+
+
+\item {\hei 某城市共有$N$辆车，车牌号从$1$到$N$($N$充分大)，若随机地(可重复)记下$n$辆车的车牌号，其最大号码为$\xi$，求$E(\xi)$。}
 \begin{proof}[解]
-	由于 $\lambda \sim \Gamma(\lambda|\alpha,\beta)$, 我们有:
 	\begin{equation}
-	p(\lambda)=\dfrac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}
+		P\left\{ \xi =m \right\}=\frac{{{m}^{n}}-{{\left( m-1 \right)}^{n}}}{{{N}^{n}}},m=1,2,\cdots ,N
 	\end{equation}
-	又由于 $x|\lambda \sim Poisson(x|\lambda)$, 因而:
 	\begin{equation}
-	p(x|\lambda)=\frac{\lambda^x}{x!}e^{-\lambda}
+		E\left( \xi  \right)=\sum\limits_{m=1}^{N}{m\cdot \frac{{{m}^{n}}-{{\left( m-1 \right)}^{n}}}{{{N}^{n}}}}=N-\sum\limits_{m=1}^{N-1}{\frac{{{m}^{n}}}{{{N}^{n}}}}
 	\end{equation}
-	所以，根据贝叶斯公式:
+
+	当$N$充分大的时候，
 	\begin{equation}
-	\begin{aligned}
-	p(\lambda|x)&=\dfrac{p(x|\lambda)p(\lambda)}{p(x)} \\
-	&=\dfrac{p(x|\lambda)p(\lambda)}{\int_{0}^{+\infty}p(x|\lambda)p(\lambda)\mathrm{d}\lambda} \\
-	&=\dfrac{\frac{\lambda^x}{x!}e^{-\lambda}\cdot\dfrac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}}{\int_{0}^{+\infty}\frac{\lambda^x}{x!}e^{-\lambda}\cdot\dfrac{\beta^{\alpha}\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)}\mathrm{d}\lambda} \\
-	&=\dfrac{\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\int_{0}^{+\infty}\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}\mathrm{d}\lambda} \\
-	&=\dfrac{\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\int_{0}^{+\infty}\left(\frac{u}{\beta+1}\right)^{(\alpha+x-1)}e^{-u}\mathrm{d}\left(\frac{u}{\beta+1}\right)} \qquad (u=(\beta+1)\lambda) \\
-	&=\dfrac{\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\frac{1}{(\beta+1)^{\alpha+x}}\int_{0}^{+\infty}u^{(\alpha+x-1)}e^{-u}\mathrm{d}u} \\
-	&=\dfrac{(\beta+1)^{\alpha+x}\lambda^{(\alpha+x-1)}e^{-(\beta+1)\lambda}}{\Gamma(\alpha+x)}
-	\end{aligned}
+		\sum\limits_{m=1}^{N-1}{\frac{{{m}^{n}}}{{{N}^{n}}}}\text{=}N\sum\limits_{m=0}^{N-1}{\frac{1}{N}\frac{{{m}^{n}}}{{{N}^{n}}}\approx N\int_{0}^{1}{{{x}^{n}}dx}}=N\frac{1}{n+1}
 	\end{equation}
-	所以, $\lambda|x \sim \Gamma(\lambda|\alpha+x,\beta+1)$
-\end{proof}
-\item {\hei 司机在一年发生事故的次数满足$\lambda$的泊松分布，而$\lambda$服从参数为$\mu$的指数分布，问某一司机上一年不发生事故，今年也不发生事故的概率。}
-\begin{proof}[解]
-	假设该司机在一年发生事故的次数为$X$，则有：
+	所以，
 	\begin{equation}
-	\begin{aligned}
-	P(X=k)&=\int_{0}^{+\infty}P(X=k|\lambda=x)f_{\lambda}(x)dx \\
-	&=\int_{0}^{+\infty}\frac{x^ke^{-x}}{k!}\mu e^{-\mu x}dx \\
-	&=\frac{\mu}{k!}\int_{0}^{+\infty}x^ke^{-(\mu+1)x}dx \\
-	&=\frac{\mu}{k!}\frac{\Gamma(k+1)}{(\mu+1)^{k+1}} \\
-	&=\frac{\mu}{(\mu+1)^{k+1}}
-	\end{aligned}
-	\end{equation}
-	因此，司机连续两年不发生事故的概率为(两年发生事故相互独立)：
-	\begin{equation}
-	P=\left(\frac{\mu}{\mu+1}\right)^2
+		E\left( \xi  \right)=N-\sum\limits_{m=1}^{N-1}{\frac{{{m}^{n}}}{{{N}^{n}}}}\approx \frac{n}{n+1}N
 	\end{equation}
 \end{proof}
 
-\item {\hei 公交站起点站等可能发出$a,b$两班汽车，其中$a$停$m$站，$b$停$n$站，车上人数服从参数为$\lambda$的泊松分布，每名乘客在各站下车的概率相同，如果该站没有乘客下车，则公交车不停站。求一辆从起点站开出的公交车停站的期望。}
+
+\item{\hei 某海港每天早上对停泊船只供给净水，初始价为每吨$a$元，不够用续供则要加$50\%$的附加费；若用不完造成浪费则每吨加收资源费$a/4$元。设某轮船的净水用量是服从密度函数为$p\left( x \right)$的随机变量，为节约用水总开支，求该轮船的最佳首次供水量$y$。}
 \begin{proof}[解]
-	一辆从起点站开出的公交车停站的次数$X$的期望满足：
+	设实际用水量为$x$,总开支为$g\left( x \right)$，则有
 	\begin{equation}
-	E(X)=\frac{1}{2}E(X_a)+\frac{1}{2}E(X_b)
+		\begin{aligned}
+			g\left( x \right)=\left\{ \begin{matrix}
+			ay+\displaystyle{\frac{a}{4}}\left( y-x \right),&x<y  \\
+			\\
+			ay+\displaystyle{\frac{3a}{2}}\left( x-y \right),&x\ge y  \\
+			\end{matrix} \right.
+		\end{aligned}
 	\end{equation}
-	其中，$X_a$表示如果开出的是$a$车停站的次数，$X_b$表示如果开出的是$b$车停站的次数。对$a$车和$b$车的讨论类似，我们这里这讨论$a$车的情况。我们有：
+	于是，总开支的期望为
 	\begin{equation}
-	X_a=X_{a1}+X_{a2}+\cdots+X_{am},\quad X_{at}=\left\{
-	\begin{array}{cc}
-	1 & \mbox{第$t$站有人下车}\\
-	0 & \mbox{第$t$站没有人下车}
-	\end{array}
-	\right.
+		\begin{aligned}
+		f\left( y \right)&=E\left[ g\left( x \right) \right] \\ 
+		& =\int_{0}^{y}{\left( ay+\frac{a}{4}y-\frac{a}{4}x \right)p\left( x \right)dx}+\int_{y}^{+\infty }{\left( ay+\frac{3a}{2}x-\frac{3a}{2}y \right)p\left( x \right)dx} \\ 
+		& =\frac{5a}{4}y\int_{0}^{y}{p\left( x \right)dx}-\frac{a}{4}\int_{0}^{y}{xp\left( x \right)dx}+\frac{3a}{2}\int_{y}^{+\infty }{xp\left( x \right)dx}-\frac{a}{2}y\int_{y}^{+\infty }{p\left( x \right)dx}  
+		\end{aligned}
 	\end{equation}
-	由于人数$K$服从参数为$\lambda$的泊松分布，则有：
+	为求期望的最小值，将上式对$y$求导
 	\begin{equation}
-	P(X_{at}=1|K=k)=1-P(X_{at}=0)=1-\left(1-\frac{1}{m}\right)^k
+		\begin{aligned}
+		 {f}'\left( y \right)&=\frac{5a}{4}\int_{0}^{y}{p\left( x \right)dx}+\frac{5a}{4}yp\left( y \right)-\frac{a}{4}yp\left( y \right)-\frac{3a}{2}yp\left( y \right)-\frac{a}{2}\int_{y}^{+\infty }{p\left( x \right)dx}+\frac{a}{2}yp\left( y \right) \\ 
+		& =\frac{5a}{4}\int_{0}^{y}{p\left( x \right)dx}-\frac{a}{2}\int_{y}^{+\infty }{p\left( x \right)dx} \\ 
+		& =\frac{7a}{4}\int_{0}^{y}{p\left( x \right)dx}-\frac{a}{2}  
+		\end{aligned}
 	\end{equation}
-	所以：
+	令$ {f}'\left( y \right)=0 $，则得最佳供水量$ y $应满足$\displaystyle{ \int_{0}^{y}{p\left( x \right)dx}= \frac{2}{7}}$。
+\end{proof}
+
+\item {\hei 已知随机变量$ X $服从参数为$ \lambda $的指数分布，求随机变量$ {Y_1}=1-{{e}^{-\lambda X}} $和$ {Y_2}={{e}^{-\lambda X}} $的概率分布。}
+\begin{proof}[解]
+	先考虑随机变量$ {Y_1} $，记$ Y=g(X)=1-{{e}^{-\lambda X}} $，易知$ g(x) $ 为关于$ x $的严格单调递增函数，值域为$ [0,1] $；它的反函数$ x=h(y)=\displaystyle{-\frac{\ln \left( 1-y \right)}{\lambda }} $也是单调递增函数，在$ y\in \left[ 0,1 \right] $上连续可导，导函数为
 	\begin{equation}
-	\begin{aligned}
-	E(X_{at}|K=k)&=1\times P(X_{at}=1|K=k)+0\times P(X_{at}=0|K=k) \\
-	&=1-\left(1-\frac{1}{m}\right)^k
-	\end{aligned}
+		{h}'\left( y \right)=\displaystyle{\frac{1}{\lambda \left( 1-y \right)}}
 	\end{equation}
-	因此：
+	可见，$ {h}'\left( y \right)>0 $，所以$ \left| {h}'\left( y \right) \right|={h}'\left( y \right) $。因此，当$ 0\le y\le 1 $时，
 	\begin{equation}
-	\begin{aligned}
-	E(X_{at})&=E(E(X_{at}|K=k)) \\
-	&=\sum_{k=0}^{+\infty}E(X_{at}|K=k)P(K=k) \\
-	&=\sum_{k=0}^{+\infty}\left(1-\left(1-\frac{1}{m}\right)^k\right)\frac{\lambda^ke^{-\lambda}}{k!} \\
-	&=1-e^{-\frac{\lambda}{m}}
-	\end{aligned}
+		\begin{aligned}
+		 {{p}_{Y}}\left( y \right)&={{p}_{X}}\left[ h\left( y \right) \right]\cdot\left|{h}'\left( y \right)\right| \\ 
+		& =\frac{1 }{\lambda \left( 1-y \right)}\lambda{{e}^{-\lambda \left[ -\frac{\ln \left( 1-y \right)}{\lambda } \right]}} \\ 
+		& =1  
+		\end{aligned}
 	\end{equation}
-	所以我们可以得到：
+	所以，随机变量$ Y $的概率密度函数为
 	\begin{equation}
-	\begin{aligned}
-	E(X_a)&=E(X_{a1}+X_{a2}+\cdots+X_{am}) \\
-	&=E(X_{a1})+E(X_{a2})+\cdots+E(X_{am}) \\
-	&=m\left(1-e^{-\frac{\lambda}{m}}\right)
-	\end{aligned}
+		\begin{aligned}
+			{{p}_{Y}}\left( y \right)=\left\{ \begin{matrix}
+			1,&0\le y\le 1  \\
+			0,&\text{others}  \\
+			\end{matrix} \right.
+		\end{aligned}
 	\end{equation}
-	同理我们可以得到：
+	即$ Y\sim U\left( 0,1 \right) $。随机变量$ {Y_2} $与之类似，也服从均匀分布，证明略。
+\end{proof}
+
+
+
+\item {\hei 设连续随机变量$ X $服从参数为$ \lambda $的指数分布，另一离散型随机变量$ Y $的可能取值为全体正整数，其分布列为$ {{P}_{Y}}\left( Y=k \right)={{P}_{X}}\left[ \left( k-1 \right)\Delta \le X\le k\Delta  \right] $,其中$ k=1,2,\cdots $，常数$ \Delta >0 $。那么，随机变量$ Y $服从哪种常用的概率分布。}
+\begin{proof}[解]
+	指数函数的分布函数为
 	\begin{equation}
-	E(X_b)=n\left(1-e^{-\frac{\lambda}{n}}\right)
+		\begin{aligned}
+			F\left( x \right)=\left\{ \begin{matrix}
+			1-{{e}^{-\lambda x}},&x\ge 0  \\
+			0,&x<0  \\
+			\end{matrix} \right.
+		\end{aligned}
 	\end{equation}
-	所以：
+	从而，$ Y $的概率分布为
 	\begin{equation}
-	E(X)=\frac{1}{2}\left(m\left(1-e^{-\frac{\lambda}{m}}\right)+n\left(1-e^{-\frac{\lambda}{n}}\right)\right)
+		\begin{aligned}
+			 {{P}_{Y}}\left( Y=k \right)& ={{P}_{X}}\left[ \left( k-1 \right)\Delta \le X\le k\Delta  \right] \\ 
+			& =F\left( k\Delta  \right)-F\left[ \left( k-1 \right)\Delta  \right] \\ 
+			& ={{\left( {{e}^{-\lambda \Delta }} \right)}^{k-1}}\left( 1-{{e}^{-\lambda \Delta }} \right)
+		\end{aligned}
+	\end{equation}
+	令$ p=1-{{e}^{-\lambda \Delta }} $，则易知$ 0<p<1 $，且有
+	\begin{equation}
+		{{P}_{Y}}\left( Y=k \right)=p{{\left( 1-p \right)}^{k-1}}
+	\end{equation}
+	所以，随机变量$ Y $服从几何分布，即$ Y\sim Ge\left( 1-{{e}^{-\lambda \Delta }} \right) $。
+\end{proof}
+
+
+\item {\hei 实验室器皿中产生甲、乙两类细菌的机会是相等的，且产生的细菌的总数服从参数为$ \lambda $的Poisson分布。求：(1)产生了甲类细菌但没有乙类细菌的概率；(2)在已知产生了细菌而且没有甲类细菌的条件下，有2个乙类细菌的概率。}
+\begin{proof}[解]
+	(1) 设产生了$ k(k>0) $个细菌为事件$ A_k $，产生的细菌全是甲类细菌没有乙类细菌为事件$ B $，则
+	\begin{equation}
+		\begin{aligned}
+		P\left( B \right)& =\sum\limits_{k=1}^{+\infty }{P\left( {{A}_{k}} \right)P\left( B\left| {{A}_{k}} \right. \right)} \\ 
+		& =\sum\limits_{k=1}^{+\infty }{\frac{{{\lambda }^{k}}}{k!}{{e}^{-\lambda }}C_{k}^{k}{{\left( \frac{1}{2} \right)}^{k}}} \\ 
+		& ={{e}^{-\lambda }}\left( {{e}^{\frac{\lambda }{2}}}-1 \right) \\ 
+		\end{aligned}
+	\end{equation}
+	(2) 所求概率为
+	\begin{equation}
+		\begin{aligned}
+			P\left( {{A}_{2}}\left| B \right. \right)& =\frac{P\left( {{A}_{2}} \right)P\left( B\left| {{A}_{2}} \right. \right)}{P\left( B \right)} \\ 
+			& =\frac{\frac{{{\lambda }^{2}}}{2!}{{e}^{-\lambda }}C_{2}^{2}{{\left( \frac{1}{2} \right)}^{2}}}{{{e}^{-\lambda }}\left( {{e}^{\frac{\lambda }{2}}}-1 \right)} \\ 
+			& =\frac{{{\lambda }^{2}}}{8\left( {{e}^{\frac{\lambda }{2}}}-1 \right)} \\ 
+		\end{aligned}
 	\end{equation}
 \end{proof}
+
+
+\item {\hei 设随机变量$ X $取值于$ [0,1] $，若$ P\left( x \leq X \leq y\right)  $只与长度$ y-x $有关（对一切$ 0\leq x  \leq y\leq1 $），求$ X $的概率分布。}
+\begin{proof}[解]
+	记$ P\left( x\leq X \leq y\right)=f\left( y - x\right)   $，则对$ x = 0 $，$ \forall y\in \left[ 0,1 \right]  $，有
+	\begin{equation}
+		P\left( 0\leq X \leq y\right)=f\left( y\right) 
+	\end{equation}
+	对$ \forall {y_1},{y_2} \in \left[ 0,1 \right] $且$ {y_1}<{y_2}  $,有
+	\begin{equation}
+		P\left( 0\leq X \leq {y_1}+{y_2} \right)=P\left( 0\leq X < {y_1} \right)+P\left( {y_1} \leq X \leq {y_1}+{y_2} \right)
+	\end{equation}
+	即有
+	\begin{equation}
+		f \left(  {y_1}+{y_2}  \right)  = f \left(   {y_1} \right)  + f \left( {y_2} \right) 
+	\end{equation}
+	因此
+	\begin{equation}
+		f \left( {y} \right)  = C y
+	\end{equation}
+	由$ f \left( 1 \right)  =  f \left( 1-0 \right)  =  P\left( 0 \leq X \leq 1 \right) = 1 $ 推得$ C = 1 $，所以$ f \left( {x} \right)  = x $，即
+	\begin{equation}
+			P\left( 0 \leq X \leq x \right)=f \left( x \right) , x \in \left[ 0,1 \right]
+	\end{equation}
+	因而$ X $服从均匀分布，即$ X \sim U\left( 0,1 \right) $。
+\end{proof}
+
+
+
+\item {\hei 设$ X $ 为伯努利试验中第一个游程(连续的成功或失败)的长，求$ X $ 的概率分布及其期望。}
+\begin{proof}[解]
+	设每次试验中成功的概率为$ p $，则失败的概率为$ 1-p $，则随机变量$ X $ 的概率分布为
+	\begin{equation}
+		P \left(  X = k \right) = p^k \left(  1 - p \right) + p {\left(  1 - p \right)}^k , k = 1,2,\cdots
+	\end{equation}
+	期望为
+	\begin{equation}
+		\begin{aligned}
+			E \left( X \right) & = \sum\limits_{k=1}^{+\infty }{\left[ k p^k \left(  1 - p \right) + kp {\left(  1 - p \right)}^k \right] }\\
+			& = \frac{p}{1-p} + \frac{1-p}{p}
+		\end{aligned}
+	\end{equation}
+\end{proof}
+
+
+%\item {\hei 食品厂把印有水浒108将之一的画卡作为赠券装入某种儿童食品袋中，每袋一卡，打开包装袋后获得每张画卡的概率是相同的。求：(1)为收集其中的$ r $张画卡所需购买的食品袋数$ X_r $ 的数学期望；(2)为集齐水浒108将，平均要购买多少袋？}
+%\begin{proof}[解]
+%	(1)将收集齐第$ j-1 $张赠券之后到收集齐第$ j $张赠券时所购买的食品袋数记为$ Y_j $，易知
+%	\begin{equation}
+%		{X_r} = {Y_1} + {Y_2} + \cdots + {Y_r}
+%	\end{equation}
+%	且$ Y_j  $服从几何分布
+%	\begin{equation}
+%		P\left( {Y_i} = k \right) ={{\left( 1-\frac{N-i+1}{N} \right)}^{k-1}}\frac{N-i+1}{N},k=1,2,\cdots
+%	\end{equation}
+%	其中$ N $代表画卡的总张数，此题中$ N=108 $，那么
+%	\begin{equation}
+%		E\left( {{Y}_{i}} \right)=\frac{N}{N-j+1},j=1,2,\cdots ,r
+%	\end{equation}
+%	因此
+%	\begin{equation}
+%		\begin{aligned}
+%			E\left( {{X}_{r}} \right)& =E\left( {{Y}_{1}} \right)+E\left( {{Y}_{2}} \right)+\cdots +E\left( {{Y}_{r}} \right) \\ 
+%			& =N\left( \frac{1}{N}+\cdots +\frac{1}{N-r+1} \right) \\ 
+%		\end{aligned}
+%	\end{equation}
+%	(2) 由上一问知
+%	\begin{equation}
+%		\begin{aligned}
+%			E\left( {{X}_{108}} \right)& =108\times \left( 1+\frac{1}{2}+\cdots +\frac{1}{108} \right) \\ 
+%			& \approx 108\times \left( \ln 108+0.5772 \right) \\ 
+%			& \approx 568.01
+%		\end{aligned}
+%	\end{equation}
+%	其中，$ 0.5772 $是欧拉常数的近似值。所以，要集齐所有画卡平均要购买569袋该食品。
+%\end{proof}
+
+
+%\item {\hei 蛤蛤蛤}
+%\begin{proof}[解]
+%	
+%\end{proof}
+
+
 \end{enumerate}
+
+
 
 
 \end{document}
