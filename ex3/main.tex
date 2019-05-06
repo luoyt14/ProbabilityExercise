@@ -175,25 +175,6 @@
 	\end{equation}
 \end{proof}
 
-\item {\hei 设随机变量$X\sim N(0,\sigma^2),Y=[X]$，即$Y$是$X$的整数部分（例如：$[1.2]=1,[-2.3]=-3$），计算$Y$的期望}
-\begin{proof}[解]
-	设$X$的分布函数为$f_X(x)$，$Y$是整数集上的离散随机变量，我们有：
-	\begin{equation}
-	P(Y=n)=\int_{n}^{n+1}f_X(x)dx
-	\end{equation}
-	考虑到$f_X(x)$是偶函数，所以:
-	\begin{equation}
-	\begin{aligned}
-	E(Y)&=\sum_{n=-\infty}^{+\infty}n\times P(y=n) \\
-	&=\sum_{n=-\infty}^{+\infty}n\times\int_{n}^{n+1}f_X(x)dx \\
-	&=\int_{1}^{2}f_X(x)dx+2\int_{2}^{3}f_X(x)dx+\cdots\\
-	&-\int_{0}^{1}f_X(x)dx-2\int_{1}^{2}f_X(x)dx-3\int_{2}^{3}f_X(x)dx-\cdots \\
-	&=-\int_{0}^{+\infty}f_X(x)dx \\
-	&=-\frac{1}{2}
-	\end{aligned}
-	\end{equation}
-\end{proof}
-
 \item {\hei 设有$k$种不同的优惠券，每次收集到第$i$种优惠券的概率为$p_i$，$\sum_{i=1}^kp_i=1$，且每次收集之间是相互独立的。如果收集了$n$张优惠券，那么优惠券的种类的期望是多少？}
 \begin{proof}[解]
 	优惠券的种类数$X$满足:
@@ -221,20 +202,6 @@
 		&=\sum_{i=1}^{k}\left(1-(1-p_i)^n\right)
 	\end{aligned}
 	\end{equation}
-\end{proof}
-
-\item {\hei 在单位圆上随机取两个点构成一条弦，试计算从原点到该弦的距离所服从的概率密度函数}
-\begin{proof}[解]
-	设两点对圆心的张角为$\theta$，则$\theta\sim U(0,\pi)$，我们有：
-	\begin{equation}
-	f_\theta(\theta)=\frac{1}{\pi}
-	\end{equation}
-	设从原点到弦的距离为$r$，则$r=\cos\left(\frac{\theta}{2}\right)$。由于在$\theta\in[0,\pi],r\in[0,1]$时，$r$是$\theta$的单调函数，于是：
-	\begin{equation}
-	f_r(r)=f_\theta(\theta)\left|\frac{d\theta}{dr}\right|=\frac{2}{\pi\sqrt{1-r^2}},r\in[0,1]
-	\end{equation}
-	
-	{\hei 注意}：这里的随机取点认为是两者所对的圆心角(取范围$[0,\pi]$)服从均匀分布，若选用其他方式，例如弦中点到圆心的距离服从均匀分布，则会得到不同的结果，这与Bertrand悖论的道理是相同的，即不同的样本空间会导致不同的结果。
 \end{proof}
 
 \item {\hei 假设$\lambda$服从以$\alpha,\beta$为参数的Gamma分布，即$\lambda\sim \Gamma(\lambda|\alpha,\beta)$。在给定$\lambda$的条件下，$x$服从以$\lambda$为参数的Poisson的分布，即$x|\lambda\sim Poisson(x|\lambda)$。试问，在给定$x$的条件下，$\lambda$的分布是什么？}
