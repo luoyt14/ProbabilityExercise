@@ -168,7 +168,7 @@
 	X=R_1+R_2+\cdots+R_n,\quad R_t=\left\{
 	\begin{array}{cc}
 	1 & \mbox{第$t$个红球仍在$R$罐}\\
-	0 & \mbox{第$t$对夫妇不在$R$罐}
+	0 & \mbox{第$t$个红球不在$R$罐}
 	\end{array}
 	\right.
 	\end{equation}
@@ -577,10 +577,10 @@ N=\min\left\{n:\sum_{i=1}^nU_i>1\right\}
 	首先我们证明一个结论，方便之后的计算。对于任意的正态分布$X\sim\mathcal{N}(0,\sigma^2)$
 	\begin{equation}
 	\begin{aligned}
-		g_X(t)=E(e^{jtX})&=\int_{-\infty}^{+\infty}e^{jtx}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{\sigma^2}}\dif x \\
-		&=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{+\infty}e^{-\frac{x^2-\sigma^2jtx}{\sigma^2}}\dif x \\
-		&\mbox{令}y=x-\frac{\sigma^2jt}{2} \\
-		&=e^{-\frac{1}{2}\sigma^2t^2}\cdot\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{+\infty}e^{-\frac{y^2}{\sigma^2}}\dif y \\
+		g_X(t)=E(e^{jtX})&=\int_{-\infty}^{+\infty}e^{jtx}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{2\sigma^2}}\dif x \\
+		&=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{+\infty}e^{-\frac{x^2-2\sigma^2jtx}{2\sigma^2}}\dif x \\
+		&\mbox{令}y=x-\sigma^2jt \\
+		&=e^{-\frac{1}{2}\sigma^2t^2}\cdot\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{+\infty}e^{-\frac{y^2}{2\sigma^2}}\dif y \\
 		&=e^{-\frac{1}{2}\sigma^2t^2}
 	\end{aligned}
 	\end{equation}
