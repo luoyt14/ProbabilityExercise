@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage{xeCJK}
+\usepackage{caption}
+\setCJKmainfont{KaiTi}
+%\setmainfont{Times New Roman}
+\setCJKfamilyfont{hei}{SimHei}                                    %黑体  hei
+\newcommand{\hei}{\CJKfamily{hei}}                          % 黑体
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{enumerate} 
+\usepackage{fontspec}
+\usepackage{diagbox}
+\usepackage{amsfonts}
+
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+%\newfontfamily{\Hei}{SimHei}
+% ========== Edit your name here
+\author{罗雁天}
+\title{期末考题整理}
+\maketitle
+
+\medskip
+
+% ========== Begin answering questions here
+\begin{enumerate}
+\item {\hei (15分)对于掷两颗骰子的随机试验。
+\begin{enumerate}[(a)]
+	\item 写出样本空间$\Omega$;
+	\item 记事件$A$为点数之和是奇数，事件$D$为至少出现一个1点，求$P(A\cup D)$;
+	\item 记事件$B$为某刻骰子出现奇数点，事件$C$为另一颗骰子出现奇数点。问$A,B,C$之间相互独立吗？说明理由。
+\end{enumerate}
+}
+\begin{proof}[解]
+	\begin{enumerate}[(a)]
+	\item \begin{equation*}\Omega=N^2,N=\{1,2,3,4,5,6\}\end{equation*}
+	\item \begin{equation*}
+		\begin{aligned}
+			&P(A)=\frac{|A|}{|\Omega|}=\frac{18}{36}=\frac{1}{2},P(D)=\frac{|D|}{|\Omega|}=\frac{11}{36} \\
+			&P(AD)=\frac{|AD|}{|\Omega|}=\frac{6}{36}=\frac{1}{6} \\
+			&\mbox{所以},P(A\cup D)=P(A)+P(D)-P(AD)=\frac{23}{36}
+		\end{aligned}
+	\end{equation*}
+	\item 不独立。\begin{equation*}
+		P(ABC)=P(\emptyset)=0\neq P(A)P(B)P(C)
+	\end{equation*}
+	\end{enumerate}
+\end{proof}
+
+
+\end{enumerate}
+
+
+\end{document}

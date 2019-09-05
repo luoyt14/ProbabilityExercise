@@ -1,0 +1,469 @@
+\documentclass[12pt]{article}
+\usepackage{xeCJK}
+\usepackage{caption}
+\setCJKmainfont{KaiTi}
+%\setmainfont{Times New Roman}
+\setCJKfamilyfont{hei}{SimHei}                                    %黑体  hei
+\newcommand{\hei}{\CJKfamily{hei}}                          % 黑体
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{enumerate} 
+\usepackage{fontspec}
+%\usepackage{setspace}
+
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+%\renewcommand{\baselinestretch}{1.0}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+%\newfontfamily{\Hei}{SimHei}
+% ========== Edit your name here
+\author{闻健}
+\title{习题课4}
+\maketitle
+
+\medskip
+
+% ========== Begin answering questions here
+\begin{enumerate}
+
+%\item {\hei 设随机变量$X\sim N(0,\sigma^2),Y=[X]$，即$Y$是$X$向下取整所得（例如：$[1.2]=1,[-2.3]=-3$），计算$Y$的期望。}
+%\begin{proof}[解]
+%	设$X$的分布函数为$f_X(x)$，$Y$是整数集上的离散随机变量，我们有：
+%	\begin{equation}
+%	P(Y=n)=\int_{n}^{n+1}f_X(x)dx
+%	\end{equation}
+%	考虑到$f_X(x)$是偶函数，所以:
+%	\begin{equation}
+%	\begin{aligned}
+%		E(Y)&=\sum_{n=-\infty}^{+\infty}n\times P(y=n) \\
+%		&=\sum_{n=-\infty}^{+\infty}n\times\int_{n}^{n+1}f_X(x)dx \\
+%		&=\int_{1}^{2}f_X(x)dx+2\int_{2}^{3}f_X(x)dx+\cdots\\
+%		&-\int_{0}^{1}f_X(x)dx-2\int_{1}^{2}f_X(x)dx-3\int_{2}^{3}f_X(x)dx-\cdots \\
+%		&=-\int_{0}^{+\infty}f_X(x)dx \\
+%		&=-\frac{1}{2}
+%	\end{aligned}
+%	\end{equation}
+%\end{proof}
+%
+%\item {\hei 在单位圆上随机取两个点构成一条弦，试计算从原点到该弦的距离所服从的概率密度函数。}
+%\begin{proof}[解]
+%	设两点对圆心的张角为$\theta$，则$\theta\sim U(0,\pi)$，我们有：
+%	\begin{equation}
+%	f_\theta(\theta)=\frac{1}{\pi}
+%	\end{equation}
+%	设从原点到弦的距离为$r$，则$r=\cos\left(\displaystyle{\frac{\theta}{2}}\right)$。由于在$\theta\in[0,\pi],r\in[0,1]$时，$r$是$\theta$的单调函数，于是：
+%	\begin{equation}
+%	f_r(r)=f_\theta(\theta)\left|\frac{d\theta}{dr}\right|=\frac{2}{\pi\sqrt{1-r^2}},r\in[0,1]
+%	\end{equation}
+%	
+%	{\hei 注意}：这里的随机取点认为是两者所对的圆心角(取范围$[0,\pi]$)服从均匀分布，若选用其他方式，例如弦中点到圆心的距离服从均匀分布，则会得到不同的结果，这与Bertrand悖论的道理是相同的，即不同的样本空间会导致不同的结果。
+%\end{proof}
+%
+%
+%
+%
+%\item {\hei 某城市共有$N$辆车，车牌号从$1$到$N$($N$充分大)，若随机地(可重复)记下$n$辆车的车牌号，其最大号码为$\xi$，求$E(\xi)$。}
+%\begin{proof}[解]
+%	\begin{equation}
+%		P\left\{ \xi =m \right\}=\frac{{{m}^{n}}-{{\left( m-1 \right)}^{n}}}{{{N}^{n}}},m=1,2,\cdots ,N
+%	\end{equation}
+%	\begin{equation}
+%		E\left( \xi  \right)=\sum\limits_{m=1}^{N}{m\cdot \frac{{{m}^{n}}-{{\left( m-1 \right)}^{n}}}{{{N}^{n}}}}=N-\sum\limits_{m=1}^{N-1}{\frac{{{m}^{n}}}{{{N}^{n}}}}
+%	\end{equation}
+%
+%	当$N$充分大的时候，
+%	\begin{equation}
+%		\sum\limits_{m=1}^{N-1}{\frac{{{m}^{n}}}{{{N}^{n}}}}\text{=}N\sum\limits_{m=0}^{N-1}{\frac{1}{N}\frac{{{m}^{n}}}{{{N}^{n}}}\approx N\int_{0}^{1}{{{x}^{n}}dx}}=N\frac{1}{n+1}
+%	\end{equation}
+%	所以，
+%	\begin{equation}
+%		E\left( \xi  \right)=N-\sum\limits_{m=1}^{N-1}{\frac{{{m}^{n}}}{{{N}^{n}}}}\approx \frac{n}{n+1}N
+%	\end{equation}
+%\end{proof}
+%
+%
+%\item{\hei 某海港每天早上对停泊船只供给净水，初始价为每吨$a$元，不够用续供则要加$50\%$的附加费；若用不完造成浪费则每吨加收资源费$a/4$元。设某轮船的净水用量是服从密度函数为$p\left( x \right)$的随机变量，为节约用水总开支，求该轮船的最佳首次供水量$y$。}
+%\begin{proof}[解]
+%	设实际用水量为$x$,总开支为$g\left( x \right)$，则有
+%	\begin{equation}
+%		\begin{aligned}
+%			g\left( x \right)=\left\{ \begin{matrix}
+%			ay+\displaystyle{\frac{a}{4}}\left( y-x \right),&x<y  \\
+%			\\
+%			ay+\displaystyle{\frac{3a}{2}}\left( x-y \right),&x\ge y  \\
+%			\end{matrix} \right.
+%		\end{aligned}
+%	\end{equation}
+%	于是，总开支的期望为
+%	\begin{equation}
+%		\begin{aligned}
+%		f\left( y \right)&=E\left[ g\left( x \right) \right] \\ 
+%		& =\int_{0}^{y}{\left( ay+\frac{a}{4}y-\frac{a}{4}x \right)p\left( x \right)dx}+\int_{y}^{+\infty }{\left( ay+\frac{3a}{2}x-\frac{3a}{2}y \right)p\left( x \right)dx} \\ 
+%		& =\frac{5a}{4}y\int_{0}^{y}{p\left( x \right)dx}-\frac{a}{4}\int_{0}^{y}{xp\left( x \right)dx}+\frac{3a}{2}\int_{y}^{+\infty }{xp\left( x \right)dx}-\frac{a}{2}y\int_{y}^{+\infty }{p\left( x \right)dx}  
+%		\end{aligned}
+%	\end{equation}
+%	为求期望的最小值，将上式对$y$求导
+%	\begin{equation}
+%		\begin{aligned}
+%		 {f}'\left( y \right)&=\frac{5a}{4}\int_{0}^{y}{p\left( x \right)dx}+\frac{5a}{4}yp\left( y \right)-\frac{a}{4}yp\left( y \right)-\frac{3a}{2}yp\left( y \right)-\frac{a}{2}\int_{y}^{+\infty }{p\left( x \right)dx}+\frac{a}{2}yp\left( y \right) \\ 
+%		& =\frac{5a}{4}\int_{0}^{y}{p\left( x \right)dx}-\frac{a}{2}\int_{y}^{+\infty }{p\left( x \right)dx} \\ 
+%		& =\frac{7a}{4}\int_{0}^{y}{p\left( x \right)dx}-\frac{a}{2}  
+%		\end{aligned}
+%	\end{equation}
+%	令$ {f}'\left( y \right)=0 $，则得最佳供水量$ y $应满足$\displaystyle{ \int_{0}^{y}{p\left( x \right)dx}= \frac{2}{7}}$。
+%\end{proof}
+%
+%\item {\hei 已知随机变量$ X $服从参数为$ \lambda $的指数分布，求随机变量$ {Y_1}=1-{{e}^{-\lambda X}} $和$ {Y_2}={{e}^{-\lambda X}} $的概率分布。}
+%\begin{proof}[解]
+%	先考虑随机变量$ {Y_1} $，记$ Y=g(X)=1-{{e}^{-\lambda X}} $，易知$ g(x) $ 为关于$ x $的严格单调递增函数，值域为$ [0,1] $；它的反函数$ x=h(y)=\displaystyle{-\frac{\ln \left( 1-y \right)}{\lambda }} $也是单调递增函数，在$ y\in \left[ 0,1 \right] $上连续可导，导函数为
+%	\begin{equation}
+%		{h}'\left( y \right)=\displaystyle{\frac{1}{\lambda \left( 1-y \right)}}
+%	\end{equation}
+%	可见，$ {h}'\left( y \right)>0 $，所以$ \left| {h}'\left( y \right) \right|={h}'\left( y \right) $。因此，当$ 0\le y\le 1 $时，
+%	\begin{equation}
+%		\begin{aligned}
+%		 {{p}_{Y}}\left( y \right)&={{p}_{X}}\left[ h\left( y \right) \right]\cdot\left|{h}'\left( y \right)\right| \\ 
+%		& =\frac{1 }{\lambda \left( 1-y \right)}\lambda{{e}^{-\lambda \left[ -\frac{\ln \left( 1-y \right)}{\lambda } \right]}} \\ 
+%		& =1  
+%		\end{aligned}
+%	\end{equation}
+%	所以，随机变量$ Y $的概率密度函数为
+%	\begin{equation}
+%		\begin{aligned}
+%			{{p}_{Y}}\left( y \right)=\left\{ \begin{matrix}
+%			1,&0\le y\le 1  \\
+%			0,&\text{others}  \\
+%			\end{matrix} \right.
+%		\end{aligned}
+%	\end{equation}
+%	即$ Y\sim U\left( 0,1 \right) $。随机变量$ {Y_2} $与之类似，也服从均匀分布，证明略。
+%\end{proof}
+%
+%
+%
+%\item {\hei 设连续随机变量$ X $服从参数为$ \lambda $的指数分布，另一离散型随机变量$ Y $的可能取值为全体正整数，其分布列为$ {{P}_{Y}}\left( Y=k \right)={{P}_{X}}\left[ \left( k-1 \right)\Delta \le X\le k\Delta  \right] $,其中$ k=1,2,\cdots $，常数$ \Delta >0 $。那么，随机变量$ Y $服从哪种常用的概率分布。}
+%\begin{proof}[解]
+%	指数函数的分布函数为
+%	\begin{equation}
+%		\begin{aligned}
+%			F\left( x \right)=\left\{ \begin{matrix}
+%			1-{{e}^{-\lambda x}},&x\ge 0  \\
+%			0,&x<0  \\
+%			\end{matrix} \right.
+%		\end{aligned}
+%	\end{equation}
+%	从而，$ Y $的概率分布为
+%	\begin{equation}
+%		\begin{aligned}
+%			 {{P}_{Y}}\left( Y=k \right)& ={{P}_{X}}\left[ \left( k-1 \right)\Delta \le X\le k\Delta  \right] \\ 
+%			& =F\left( k\Delta  \right)-F\left[ \left( k-1 \right)\Delta  \right] \\ 
+%			& ={{\left( {{e}^{-\lambda \Delta }} \right)}^{k-1}}\left( 1-{{e}^{-\lambda \Delta }} \right)
+%		\end{aligned}
+%	\end{equation}
+%	令$ p=1-{{e}^{-\lambda \Delta }} $，则易知$ 0<p<1 $，且有
+%	\begin{equation}
+%		{{P}_{Y}}\left( Y=k \right)=p{{\left( 1-p \right)}^{k-1}}
+%	\end{equation}
+%	所以，随机变量$ Y $服从几何分布，即$ Y\sim Ge\left( 1-{{e}^{-\lambda \Delta }} \right) $。
+%\end{proof}
+%
+%
+%\item {\hei 实验室器皿中产生甲、乙两类细菌的机会是相等的，且产生的细菌的总数服从参数为$ \lambda $的Poisson分布。求：(1)产生了甲类细菌但没有乙类细菌的概率；(2)在已知产生了细菌而且没有甲类细菌的条件下，有2个乙类细菌的概率。}
+%\begin{proof}[解]
+%	(1) 设产生了$ k(k>0) $个细菌为事件$ A_k $，产生的细菌全是甲类细菌没有乙类细菌为事件$ B $，则
+%	\begin{equation}
+%		\begin{aligned}
+%		P\left( B \right)& =\sum\limits_{k=1}^{+\infty }{P\left( {{A}_{k}} \right)P\left( B\left| {{A}_{k}} \right. \right)} \\ 
+%		& =\sum\limits_{k=1}^{+\infty }{\frac{{{\lambda }^{k}}}{k!}{{e}^{-\lambda }}C_{k}^{k}{{\left( \frac{1}{2} \right)}^{k}}} \\ 
+%		& ={{e}^{-\lambda }}\left( {{e}^{\frac{\lambda }{2}}}-1 \right) \\ 
+%		\end{aligned}
+%	\end{equation}
+%	(2) 因为产生甲、乙两类细菌的机会是相等的，故所求概率等于
+%	\begin{equation}
+%		\begin{aligned}
+%			P\left( {{A}_{2}}\left| B \right. \right)& =\frac{P\left( {{A}_{2}} \right)P\left( B\left| {{A}_{2}} \right. \right)}{P\left( B \right)} \\ 
+%			& =\frac{\frac{{{\lambda }^{2}}}{2!}{{e}^{-\lambda }}C_{2}^{2}{{\left( \frac{1}{2} \right)}^{2}}}{{{e}^{-\lambda }}\left( {{e}^{\frac{\lambda }{2}}}-1 \right)} \\ 
+%			& =\frac{{{\lambda }^{2}}}{8\left( {{e}^{\frac{\lambda }{2}}}-1 \right)} \\ 
+%		\end{aligned}
+%	\end{equation}
+%\end{proof}
+%
+%
+%\item {\hei 设随机变量$ X $取值于$ [0,1] $，若$ P\left( x \leq X \leq y\right)  $只与长度$ y-x $有关（对一切$ 0\leq x  \leq y\leq1 $），求$ X $的概率分布。}
+%\begin{proof}[解]
+%	记$ P\left( x\leq X \leq y\right)=f\left( y - x\right)   $，则对$ x = 0 $，$ \forall y\in \left[ 0,1 \right]  $，有
+%	\begin{equation}
+%		P\left( 0\leq X \leq y\right)=f\left( y\right) 
+%	\end{equation}
+%	对$ \forall {y_1},{y_2} \in \left[ 0,1 \right] $且$ {y_1}<{y_2}  $,有
+%	\begin{equation}
+%		P\left( 0\leq X \leq {y_1}+{y_2} \right)=P\left( 0\leq X < {y_1} \right)+P\left( {y_1} \leq X \leq {y_1}+{y_2} \right)
+%	\end{equation}
+%	即有
+%	\begin{equation}
+%		f \left(  {y_1}+{y_2}  \right)  = f \left(   {y_1} \right)  + f \left( {y_2} \right) 
+%	\end{equation}
+%	因此
+%	\begin{equation}
+%		f \left( {y} \right)  = C y
+%	\end{equation}
+%	由$ f \left( 1 \right)  =  f \left( 1-0 \right)  =  P\left( 0 \leq X \leq 1 \right) = 1 $ 推得$ C = 1 $，所以$ f \left( {x} \right)  = x $，即
+%	\begin{equation}
+%			P\left( 0 \leq X \leq x \right)=f \left( x \right) , x \in \left[ 0,1 \right]
+%	\end{equation}
+%	因而$ X $服从均匀分布，即$ X \sim U\left( 0,1 \right) $。
+%\end{proof}
+%
+%
+%
+%\item {\hei 设$ X $ 为伯努利试验中第一个游程(连续的成功或失败)的长，求$ X $ 的概率分布及其期望。}
+%\begin{proof}[解]
+%	设每次试验中成功的概率为$ p $，则失败的概率为$ 1-p $，则随机变量$ X $ 的概率分布为
+%	\begin{equation}
+%		P \left(  X = k \right) = p^k \left(  1 - p \right) + p {\left(  1 - p \right)}^k , k = 1,2,\cdots
+%	\end{equation}
+%	期望为
+%	\begin{equation}
+%		\begin{aligned}
+%			E \left( X \right) & = \sum\limits_{k=1}^{+\infty }{\left[ k p^k \left(  1 - p \right) + kp {\left(  1 - p \right)}^k \right] }\\
+%			& = \frac{p}{1-p} + \frac{1-p}{p}
+%		\end{aligned}
+%	\end{equation}
+%\end{proof}
+
+
+%\item {\hei 食品厂把印有水浒108将之一的画卡作为赠券装入某种儿童食品袋中，每袋一卡，打开包装袋后获得每张画卡的概率是相同的。求：(1)为收集其中的$ r $张画卡所需购买的食品袋数$ X_r $ 的数学期望；(2)为集齐水浒108将，平均要购买多少袋？}
+%\begin{proof}[解]
+%	(1)将收集齐第$ j-1 $张赠券之后到收集齐第$ j $张赠券时所购买的食品袋数记为$ Y_j $，易知
+%	\begin{equation}
+%		{X_r} = {Y_1} + {Y_2} + \cdots + {Y_r}
+%	\end{equation}
+%	且$ Y_j  $服从几何分布
+%	\begin{equation}
+%		P\left( {Y_i} = k \right) ={{\left( 1-\frac{N-i+1}{N} \right)}^{k-1}}\frac{N-i+1}{N},k=1,2,\cdots
+%	\end{equation}
+%	其中$ N $代表画卡的总张数，此题中$ N=108 $，那么
+%	\begin{equation}
+%		E\left( {{Y}_{i}} \right)=\frac{N}{N-j+1},j=1,2,\cdots ,r
+%	\end{equation}
+%	因此
+%	\begin{equation}
+%		\begin{aligned}
+%			E\left( {{X}_{r}} \right)& =E\left( {{Y}_{1}} \right)+E\left( {{Y}_{2}} \right)+\cdots +E\left( {{Y}_{r}} \right) \\ 
+%			& =N\left( \frac{1}{N}+\cdots +\frac{1}{N-r+1} \right) \\ 
+%		\end{aligned}
+%	\end{equation}
+%	(2) 由上一问知
+%	\begin{equation}
+%		\begin{aligned}
+%			E\left( {{X}_{108}} \right)& =108\times \left( 1+\frac{1}{2}+\cdots +\frac{1}{108} \right) \\ 
+%			& \approx 108\times \left( \ln 108+0.5772 \right) \\ 
+%			& \approx 568.01
+%		\end{aligned}
+%	\end{equation}
+%	其中，$ 0.5772 $是欧拉常数的近似值。所以，要集齐所有画卡平均要购买569袋该食品。
+%\end{proof}
+
+
+%\item {\hei 蛤蛤蛤}
+%\begin{proof}[解]
+%	
+%\end{proof}
+
+
+\item {\hei 随机变量$ X $的特征函数为$ \varphi (t) $，通过构造随机变量来证明：$ {{\left| \varphi \left( t \right) \right|}^{2}} $也是特征函数。}
+\begin{proof}[解]
+	假设随机变量$ X_{1} $和$ X_{2} $，分别与$ X $和$ -X $同分布，并且相互独立，则随机变量$ X_{1}+X_{2} $的特征函数为$ {{\varphi }_{{{X}_{1}}+{{X}_{2}}}}\left( t \right)=\varphi \left( t \right)\cdot \varphi \left( -t \right)=\varphi \left( t \right)\cdot \overline{\varphi \left( t \right)}={{\left| \varphi \left( t \right) \right|}^{2}} $。
+\end{proof}
+
+
+\item {\hei 设$ \varphi(t) $表示独立同分布随机变量序列$ \left\{ {{X}_{k}} \right\} $的特征函数，$ {\xi}  $为与$ \left\{ {{X}_{k}} \right\} $独立的随机变量，它的概率分布为$ P\left\{ \xi =n \right\}={{p}_{n}} $，其中$ n $为正整数。求随机变量$ Y=\sum\limits_{k=1}^{\xi }{{{X}_{k}}} $的特征函数。}
+\begin{proof}[解]
+	\begin{equation}
+		\begin{aligned}
+			{{\varphi }_{Y}}\left( t \right)&=E\left( {{\text{e}}^{itY}} \right) \\ 
+			& =E\left[ E\left( {{\text{e}}^{itY}}\left| \xi  \right. \right) \right] \\ 
+			& =\sum\limits_{n=1}^{\infty }{E\left[ {{\text{e}}^{it\left( {{X}_{1}}+{{X}_{2}}+\cdots +{{X}_{n}} \right)}}\left| \xi =n \right. \right]P\left\{ \xi =n \right\}} \\ 
+			& =\sum\limits_{n=1}^{\infty }{E\left[ {{\text{e}}^{it\left( {{X}_{1}}+{{X}_{2}}+\cdots +{{X}_{n}} \right)}} \right]P\left\{ \xi =n \right\}} \\ 
+			& =\sum\limits_{n=1}^{\infty }{{{\varphi }^{n}}\left( t \right){{p}_{n}}}
+		\end{aligned}
+	\end{equation}
+\end{proof}
+
+
+\item {\hei 设$ \left\{ {{X}_{n}} \right\} $为独立的随机变量序列，且具有相同的特征函数$ \varphi \left( t \right)=1+iat+o\left( t \right) $，其中$ a $为常数。证明：$ \displaystyle{\frac{1}{n}}\sum\limits_{k=1}^{n}{{{X}_{k}}}\stackrel{P}{\longrightarrow} a $。}
+\begin{proof}[解]
+	相同的特征函数意味着序列$ \left\{ {{X}_{n}} \right\} $服从相同的分布，且
+	\begin{equation}
+		E\left( {{X}_{n}} \right)=\frac{{\varphi }'\left( 0 \right)}{i}=a<\infty,
+	\end{equation}
+	故依据辛钦大数定律，对任意的$ \varepsilon>0 $，
+	\begin{equation}
+		\underset{n\to \infty }{\mathop{\lim }}\,P\left\{ \left| \frac{1}{n}\sum\limits_{k=1}^{n}{{{X}_{k}}}-\frac{1}{n}\sum\limits_{k=1}^{n}{E\left( {{X}_{k}} \right)} \right|<\varepsilon  \right\}=\underset{n\to \infty }{\mathop{\lim }}\,P\left\{ \left| \frac{1}{n}\sum\limits_{k=1}^{n}{{{X}_{k}}}-a \right|<\varepsilon  \right\}=1,
+	\end{equation}
+	即$ \displaystyle{\frac{1}{n}}\sum\limits_{k=1}^{n}{{{X}_{k}}} $依概率收敛于$ a $。
+\end{proof}
+
+
+%\item {\hei 利用特征函数证明教材98页的定理2.4.1。}
+%\begin{proof}[解]
+%	事件A发生的次数为$ X \sim b\left( n,{{p}_{n}} \right) $，其特征函数为
+%	\begin{equation}
+%		{{\varphi }_{n}}\left( t \right)={{\left[ 1+{{p}_{n}}\left( {{\text{e}}^{it}}-1 \right) \right]}^{n}}={{\left[ 1+\frac{n{{p}_{n}}\left( {{\text{e}}^{it}}-1 \right)}{n} \right]}^{n}},
+%	\end{equation}
+%	当$ n \longrightarrow \infty $时，则
+%	\begin{equation}
+%		\underset{n\to \infty }{\mathop{\lim }}\,{{\varphi }_{n}}\left( t \right)={{\left[ 1+\frac{\lambda \left( {{\text{e}}^{it}}-1 \right)}{n} \right]}^{n}}={{\text{e}}^{\lambda \left( {{\text{e}}^{it}}-1 \right)}},
+%	\end{equation}
+%	由唯一性定理可知泊松定理成立。
+%\end{proof}
+
+
+\item {\hei 独立随机变量序列$ \left\{ {{X}_{k}} \right\} $，其中$ k $为正整数，服从参数为$ {{k}^{r}} $的泊松分布。证明：当$ r < 1 $时，$ \left\{ {{X}_{k}} \right\} $服从大数定律。}
+\begin{proof}[解]
+	泊松分布的方差为$ \operatorname{var}\left( {{X}_{k}} \right)={{k}^{r}} $，当$ r < 1 $时，
+	\begin{equation}
+		\frac{1}{{{n}^{2}}}\operatorname{Var}\left( \sum\limits_{k=1}^{n}{{{X}_{k}}} \right)=\frac{1}{{{n}^{2}}}\sum\limits_{k=1}^{n}{{{k}^{r}}}\le \frac{n}{{{n}^{2}}}{{n}^{r}}={{n}^{r-1}} \longrightarrow 0,
+	\end{equation}
+	即马尔可夫条件成立，故$ \left\{ {{X}_{k}} \right\} $服从大数定律。
+\end{proof}
+
+
+\item {\hei 航空公司为了减小损失，会对一些航班进行超售管理。假设某航班的执飞飞机共有310个座位，根据历史数据，该航班的乘客不能按时登机的概率为0.03。那么如果航空公司实际售出314张票，求所有按时登机的乘客都有座位的概率。}
+\begin{proof}[解]
+	设按时登机的乘客数为$ Y_n $，则
+	\begin{equation}
+		Y_n \sim b(314,0.97), E(Y_n ) = 304.58, \operatorname{Var}\left( {{Y}_{n}} \right) = 9.1374 .
+	\end{equation}
+	所求概率为
+	\begin{equation}
+		P\left( {{Y}_{n}}\le 310 \right)\approx \Phi \left( \frac{310+0.5-304.58}{\sqrt{9.1374}} \right)\approx 0.9749 .
+	\end{equation}
+\end{proof}
+
+
+\item {\hei 设$ n $重伯努利试验中，事件$ A $在每次试验中出现的概率为$ p\left( 0<p<1 \right) $，记$ X $为$ n $次试验中事件$ A $出现的次数。分别用切比雪夫不等式和中心极限定理估计满足
+	\begin{equation}\nonumber
+		P\left( \left| {\frac{X}{n}}-p \right|<{\frac{\sqrt{\operatorname{Var}\left( X \right)}}{2}} \right)>0.99
+	\end{equation}
+	的$ n $的值。}
+\begin{proof}[解]
+	(1)切比雪夫不等式：\\
+	\begin{equation}
+		P\left( \left| \frac{X}{n}-p \right|<\frac{\sqrt{\operatorname{Var}\left( X \right)}}{2} \right) \geq 1-\frac{\frac{\operatorname{Var}\left( X \right)}{{{n}^{2}}}}{{{\left( \frac{\sqrt{\operatorname{Var}\left( X \right)}}{2} \right)}^{2}}}=1-\frac{4}{{{n}^{2}}}>0.99,
+	\end{equation}
+	所以$ n > 20 $。\\
+	(2)中心极限定理：\\
+	\begin{equation}
+		P\left( \left| \frac{X}{n}-p \right|<\frac{\sqrt{\operatorname{Var}\left( X \right)}}{2} \right)=P\left( \frac{\left| \frac{X}{n}-p \right|}{\frac{\sqrt{\operatorname{Var}\left( X \right)}}{n}}<\frac{n}{2} \right)=2\Phi \left( \frac{n}{2} \right)-1>0.99
+	\end{equation}
+	所以，$ \Phi \left( \displaystyle{\frac{n}{2}} \right)>0.995 $，则$ n>5.152 $。
+\end{proof}
+
+
+\item {\hei 试分别利用切比雪夫不等式和中心极限定理，求以不小于0.99的概率保证用频率估计事件发生概率的误差不大于0.01的独立伯努利试验次数。}
+\begin{proof}[解]
+	记事件发生次数为$ X $，所需试验次数为$ n $。因为事件发生概率未知，所以事件发生次数的方差应取最大值，即假设$ \operatorname{Var}\left( X \right)=npq=0.25n $。在此假设下，\\
+	(1)切比雪夫不等式：\\
+	\begin{equation}
+		P\left( \left| \frac{X}{n}-p \right|<0.01 \right)\ge 1-\frac{\frac{0.25}{n}}{{{\left( 0.01 \right)}^{2}}}>0.99
+	\end{equation}
+	所以，$ n > 250000 $。\\
+	(2)中心极限定理：\\
+	\begin{equation}
+		P\left( \left| \frac{X}{n}-p \right|<0.01 \right)=P\left( \frac{\left| \frac{X}{n}-p \right|}{\sqrt{\frac{0.25}{n}}}<\frac{0.01}{\sqrt{\frac{0.25}{n}}} \right)=2\Phi \left( \frac{0.01}{\sqrt{\frac{0.25}{n}}} \right)-1>0.99
+	\end{equation}
+	所以，$ \Phi \left( \displaystyle{\frac{0.01}{\sqrt{\frac{0.25}{n}}}} \right)>0.995 $，则$ n>16587.24 $。
+\end{proof}
+
+
+\item {\hei 设$ \left\{ {{X}_{n}} \right\} $为独立的随机变量序列，且$ P\left( {{X}_{n}}=\pm {{n}^{r}} \right)=\displaystyle{\frac{1}{2}} $，其中$ n $为正整数。利用中心极限定理证明：若$ r\geq  \displaystyle{\frac{1}{2}} $，$ \left\{ {{X}_{n}} \right\} $不服从大数定律。}
+\begin{proof}[解]
+	$  {{X}_{n}}  $的期望和方差分别为
+	\begin{equation}
+		E\left( {{X}_{n}} \right)=0,\operatorname{Var}\left( {{X}_{n}} \right)={{n}^{2r}}.
+	\end{equation}
+	对$ \delta > 0 $，
+	\begin{equation}
+		\begin{aligned}
+			\frac{1}{B_{n}^{2+\delta }}\sum\limits_{k=1}^{n}{E\left( {{\left| {{X}_{k}}-{{\mu }_{k}} \right|}^{2+\delta }} \right)} &=\frac{\sum\limits_{k=1}^{n}{{{k}^{r\left( 2+\delta  \right)}}}}{{{\left( \sum\limits_{k=1}^{n}{{{k}^{2r}}} \right)}^{\frac{2+\delta }{2}}}} \\ 
+			& =\frac{{{\left( 2r+1 \right)}^{\frac{2+\delta }{2}}}}{r\left( 2+\delta  \right)+1}\cdot \frac{{{n}^{r\left( 2+\delta  \right)+1}}}{{{n}^{\left( 2r+1 \right)\frac{2+\delta }{2}}}} \\ 
+			& =\frac{{{\left( 2r+1 \right)}^{\frac{2+\delta }{2}}}}{r\left( 2+\delta  \right)+1}\cdot \frac{1}{{{n}^{\frac{\delta }{2}}}} \longrightarrow 0,
+		\end{aligned}
+	\end{equation}
+	即$  {{X}_{n}}  $满足李雅普诺夫条件，所以可以使用中心极限定理。如果$ r\geq  \displaystyle{\frac{1}{2}} $，则对任意$ \varepsilon>0 $，有
+	\begin{equation}
+		\frac{{{\varepsilon }^{2}}{{n}^{2}}}{B_{n}^{2}}=\frac{{{\varepsilon }^{2}}{{n}^{2}}}{\sum\limits_{k=1}^{n}{{{k}^{2r}}}}\le \frac{{{\varepsilon }^{2}}{{n}^{2}}}{\sum\limits_{k=1}^{n}{k}}=\frac{2{{\varepsilon }^{2}}{{n}^{2}}}{n\left( n+1 \right)} \longrightarrow 2{{\varepsilon }^{2}}
+	\end{equation}
+	当$ n $充分大时，$ \displaystyle{\frac{\varepsilon n}{{{B}_{n}}}}<\sqrt{3}\varepsilon  $，且有
+	\begin{equation}
+		\begin{aligned}
+			P\left\{ \frac{1}{n}\left| \sum\limits_{k=1}^{n}{{{X}_{k}}} \right|<\varepsilon  \right\} &=P\left\{ \frac{{{B}_{n}}}{n}\cdot \frac{1}{{{B}_{n}}}\left| \sum\limits_{k=1}^{n}{{{X}_{k}}} \right|<\varepsilon  \right\} \\ 
+			& =P\left\{ \frac{1}{{{B}_{n}}}\left| \sum\limits_{k=1}^{n}{{{X}_{k}}} \right|<\frac{\varepsilon n}{{{B}_{n}}} \right\} \\ 
+			& \le P\left\{ \frac{1}{{{B}_{n}}}\left| \sum\limits_{k=1}^{n}{{{X}_{k}}} \right|<\sqrt{3}\varepsilon  \right\}	.	
+		\end{aligned}
+	\end{equation}
+	因此，
+	\begin{equation}
+		\begin{aligned}
+			\underset{n\to \infty }{\mathop{\lim }}\,P\left\{ \frac{1}{n}\left| \sum\limits_{k=1}^{n}{{{X}_{k}}} \right|<\varepsilon  \right\}
+			& \le \underset{n\to \infty }{\mathop{\lim }}\,P\left\{ \frac{1}{{{B}_{n}}}\left| \sum\limits_{k=1}^{n}{{{X}_{k}}} \right|<\sqrt{3}\varepsilon  \right\} \\ 
+			& =\frac{1}{2\pi }\int_{-\sqrt{3}\varepsilon }^{\sqrt{3}\varepsilon }{{{\text{e}}^{-\frac{1}{2}{t}^{2}}}}\text{d}t \\ 
+			& <1 .
+		\end{aligned}
+	\end{equation}
+	故不服从大数定律。
+\end{proof}
+
+
+\item {\hei 用特征函数法直接证明棣莫弗-拉普拉斯中心极限定理。}
+\begin{proof}[解]
+	记$ {{S}_{n}}\sim b\left( n,p \right) $，则$ {{S}_{n}} $的特征函数为$ {{\varphi }_{n}}\left( t \right)={{\left( q+p{{\text{e}}^{it}} \right)}^{n}} $，由此$ Y_{n}^{*}=\displaystyle{\frac{{{S}_{n}}-np}{\sqrt{npq}}} $的特征函数为
+	\begin{equation}
+		\begin{aligned}
+			{{f}_{n}}\left( t \right)&={{\left( q+p{{\text{e}}^{\frac{it}{\sqrt{npq}}}} \right)}^{n}}{{\text{e}}^{-\frac{npit}{\sqrt{npq}}}} \\ 
+			& ={{\left( q{{\text{e}}^{-\frac{pit}{\sqrt{npq}}}}+p{{\text{e}}^{\frac{qit}{\sqrt{npq}}}} \right)}^{n}} \\ 
+			& ={{\left[ q\left( 1-\frac{pit}{\sqrt{npq}}-\frac{p{{t}^{2}}}{2nq} \right)+p\left( 1+\frac{qit}{\sqrt{npq}}-\frac{q{{t}^{2}}}{2np} \right)+o\left( \frac{{{t}^{2}}}{n} \right) \right]}^{n}} \\ 
+			& ={{\left[ 1-\frac{{{t}^{2}}}{2n}+o\left( \frac{{{t}^{2}}}{n} \right) \right]}^{n}}\longrightarrow {{\text{e}}^{-\frac{1}{2}{{t}^{2}}}}
+		\end{aligned}
+	\end{equation}
+	由定理 4.2.6 即证得棣莫弗-拉普拉斯中心极限定理。
+\end{proof}
+
+
+%\item {\hei 蛤蛤蛤}
+%\begin{proof}[解]
+%	
+%\end{proof}
+
+
+%\item {\hei 蛤蛤蛤}
+%\begin{proof}[解]
+%	
+%\end{proof}
+
+
+%\item {\hei 蛤蛤蛤}
+%\begin{proof}[解]
+%	
+%\end{proof}
+
+
+%\item {\hei 蛤蛤蛤}
+%\begin{proof}[解]
+%	
+%\end{proof}
+
+\end{enumerate}
+
+
+
+
+\end{document}
