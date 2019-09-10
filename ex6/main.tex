@@ -7,6 +7,7 @@
 \newcommand{\hei}{\CJKfamily{hei}}                          % 黑体
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage{tikz}
 \usepackage{enumerate} 
 \usepackage{fontspec}
@@ -56,7 +57,146 @@
 	\end{enumerate}
 \end{proof}
 
+\item {\hei (10分)连续地做某项试验，每次试验只有成功和失败两种结果。已知当第$k$次试验成功时，第$k+1$次试验成功的概率为$1/2$；当第$k$次试验失败时，第$k+1$次试验成功的概率为$3/4$。如果第一次试验成功的概率为$1/2$,
+\begin{enumerate}[(a)]
+	\item 求出第九次试验成功的概率；
+	\item 若记$X$为首次获得成功所需的试验次数，求$P(X=9)$；
+\end{enumerate}}
+\begin{proof}[解]
+	\begin{enumerate}[(a)]
+		\item 由全概率公式：
+		\begin{equation*}
+		\begin{aligned}
+		P(A_k)&=P(A_k|A_{k-1})P(A_{k-1})+P(A_k|\overline{A_{k-1}})P(\overline{A_{k-1}}) \\
+		&=\frac{1}{2}P(A_{k-1})+\frac{3}{4}P(\overline{A_{k-1}}) \\
+		&=\frac{1}{2}P(A_{k-1})+\frac{3}{4}[1-P(A_{k-1})] \\
+		&=\frac{3}{4}-\frac{1}{4}P(A_{k-1})
+		\end{aligned}
+		\end{equation*}
+		求解上述递推式得：
+		\begin{equation*}
+		P(A_k)=\frac{3}{5}-\frac{1}{10}\left(-\frac{1}{4}\right)^{k-1}
+		\end{equation*}
+		所以\begin{equation*}
+		P(A_9)=\frac{3}{5}-\frac{1}{5\times 2^{17}}
+		\end{equation*}
+		\item 由乘法公式：
+		\begin{equation*}
+		\begin{aligned}
+		P(X=9)&=P(\overline{A_{1}}\overline{A_{2}}\cdots \overline{A_{8}}A_9) \\
+		&=P(\overline{A_{1}})P(\overline{A_{2}}|\overline{A_{1}})\cdots P(A_9|\overline{A_{1}}\overline{A_{2}}\cdots \overline{A_{8}}) \\
+		&=\frac{3}{2^{17}}
+		\end{aligned}
+		\end{equation*}
+	\end{enumerate}
+\end{proof}
+\item {\hei (15分)von Neumann曾断言，用任何一枚硬币都可做出公平的抉择，具体办法是：把这枚硬币独立投掷两次(称为一轮投掷)，如果得到“正反”或“反正”，试验就结束，否则就要重复此过程。记掷一次硬币得到正面的概率为$p\in (0,1)$并设试验结束时的掷币轮数为$X$。
+\begin{enumerate}[(a)]
+	\item 求$X$的概率分布列；
+	\item 求$X$的数学期望；
+	\item 证明试验以“正反”结束和“反正”结束的可能性相同。
+\end{enumerate}}
+\begin{proof}[解]
+	\begin{enumerate}[(a)]
+		\item $X$的概率分布列为(本质上就是参数为$2pq$的几何分布)：
+		\begin{equation*}
+		P(X=n)=(p^2+q^2)^{n-1}pq+(p^2+q^2)^{n-1}qp=2pq(1-2pq)^{n-1}
+		\end{equation*}
+		其中$q=1-p$
+		\item 几何分布的期望：$E(X)=\frac{1}{2pq}$
+		\item \begin{equation*}
+		\begin{aligned}
+		&P(\mbox{以“正反”结束})=\sum_{n\geq 1}(p^2+q^2)^{n-1}pq=\frac{pq}{1-p^2-q^2}=\frac{1}{2} \\
+		&P(\mbox{以“反正”结束})=\sum_{n\geq 1}(p^2+q^2)^{n-1}qp=\frac{qp}{1-p^2-q^2}=\frac{1}{2}
+		\end{aligned}
+		\end{equation*}
+		所以，试验以“正反”结束和“反正”结束的可能性相同
+	\end{enumerate}
+\end{proof}
 
+\item {\hei 假设一批灯泡的使用寿命年数服从$\lambda=1$的指数分布。从这批灯泡中任取两个分别标记为1号和2号，先点亮1号灯泡并开始计时，等其熄灭后立即点亮2号灯泡，两灯泡的总时间记为$Y$年。将1号灯泡的使用寿命记做$X$年。
+\begin{enumerate}[(a)]
+	\item 求给定$X=x>0$条件下$Y$的条件密度函数；
+	\item 求$X$和$Y$的联合密度函数；
+	\item 判断$X$和$Y$的独立性并说明理由；
+	\item 已知$X=2$的条件下，求$Y$值在均方误差最小意义下的最优预测。
+\end{enumerate}}
+\begin{proof}[解]
+	\begin{enumerate}[(a)]
+		\item $Y-X$是2号灯的寿命，且$X$与$Y-X$相互独立。当$y\ge x >0$时，
+		\begin{equation*}
+		F(y|x)=P(Y\le y|X=x)=P(Y-X\le y<x|X=x)=P(Y-X\le y-x)=1-e^{-(y-x)}
+		\end{equation*}
+		因此，$p(y|x)=e^{x-y} I_{y\ge x>0}$
+		\item $p(x,y)=p(x)p(y|x)=e^{-x}e^{x-y}I_{y\ge x>0}=e^{-y}I_{y\ge x>0}$
+		\item 不独立。因为：
+		\begin{equation*}
+		\begin{aligned}
+		&p(x)=e^{-x},x\ge 0\\
+		&p(y)=\int_{0}^yp(x,y)dx=\int_{0}^{y}e^{-y}dx=ye^{-y},y\ge 0 \\
+		&p(x,y)=e^{-y}I_{y\ge x>0}\ne e^{-x}ye^{-y}=p(x)p(y)
+		\end{aligned}
+		\end{equation*}
+		所以，不独立。
+		\item $\hat{y}=\arg\min E[(Y-y)^2|X=2]$.
+		\begin{equation*}
+		\begin{aligned}
+		E[(Y-y)^2|X=2]&=\int_{2}^{+\infty}(u-y)^2e^{2-u}du \\
+		&=y^2-2(2+1)y+2^2+2(2+1) \\
+		&=y^2-6y+10
+		\end{aligned}
+		\end{equation*}
+		所以$\hat{y}=3$
+	\end{enumerate}
+\end{proof}
+
+
+\item {\hei 已知随机变量$X$和$Y$服从二元正态分布$(X,Y)\sim N(0,1,4,9,1/2)$，令$U=\frac{X}{2}+\frac{Y}{3},V=\frac{X}{2}-\frac{Y}{3}$
+\begin{enumerate}[(a)]
+	\item 求随机变量$U$和$V$的协方差；
+	\item 求随机变量$U$和$V$的联合分布；
+	\item 判断$U$和$V$的独立性并说明理由；
+\end{enumerate}}
+\begin{proof}[解]
+	\begin{enumerate}[(a)]
+		\item $Cov(U,V)=Cov(\frac{X}{2}+\frac{Y}{3},\frac{X}{2}-\frac{Y}{3})=Var(X)/4-Var(Y)/9=0$
+		\item 易得：\begin{equation*}
+		\begin{aligned}
+		&E(U)=E(\frac{X}{2}+\frac{Y}{3})=\frac{1}{3},E(V)=E(\frac{X}{2}-\frac{Y}{3})=-\frac{1}{3} \\
+		&Var(U)=E(U^2)-E(U)^2=3 \\
+		&Var(V)=E(V^2)-E(V)^2=1 \\
+		\end{aligned}
+		\end{equation*}
+		根据正态分布在线性变换下的不变性，有$(U,V)\sim N(1/3,-1/3,3,1,0)$
+		
+		{\hei $\bigstar$ 本小问也可以用矩阵法解决，更简单。}
+		\item 独立。正态分布下，独立和不相关等价。
+	\end{enumerate}
+\end{proof}
+
+\item {\hei 一批产品中含有废品。从中作放回抽样$n$次，每次随机抽取一件检查，结果发现抽到废品$m$次。
+\begin{enumerate}[(a)]
+	\item 求这批产品废品率的矩估计；
+	\item\label{b} 求废品率的最大似然估计；
+	\item 判断(b)中估计量的相合性和无偏性并说明理由；
+	\item 构造一个废品率的置信区间所需要的近似服从标准正态分布的枢轴量。
+\end{enumerate}}
+\begin{proof}[解]
+	设废品率为$p$，则总体$X\sim b(1,p)$。
+	\begin{enumerate}[(a)]
+		\item 因为$p=EX$，所以矩估计$\hat{p}_M=\bar{x}=m/n$
+		\item 似然函数为$L(p)=p^m(1-p)^{n-m}$，对数似然函数为$\ln L(p)=m\ln p+(n-m)\ln (1-p)$
+		
+		似然方程为：
+		\begin{equation}
+		\frac{m}{p}-\frac{n-m}{1-p}=0
+		\end{equation}
+		所以，$\hat{p}=m/n$
+		\item 由大数定理可知满足相合性。令$x_i$为第$i$次抽到次品的示性函数，则$\hat{p}=\sum_{i=1}^{n}\frac{x_i}{n}$，所以$E(\hat{p})=E(\sum_{i=1}^{n}\frac{x_i}{n})=p$，所以也是无偏的。
+		\item 由中心极限定理，枢轴量$\frac{m-np}{\sqrt{np(1-p)}}\sim N(0,1)$
+	\end{enumerate}
+	
+\end{proof}
 \end{enumerate}
 
 
